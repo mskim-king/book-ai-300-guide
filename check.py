@@ -44,8 +44,8 @@ def main() -> None:
 
     stale, retest, drafts = [], [], 0
     for ch in data["chapters"]:
-        for p in ch.get("pages", []):
-            rel = f"{ch['id']}-{ch['slug']}/{p['slug']}.md"
+        for i, p in enumerate(ch.get("pages", []), 1):
+            rel = f"pages/{ch['id']}-{i}-{p['slug']}.md"
             f = ROOT / rel
             if not f.exists():
                 continue

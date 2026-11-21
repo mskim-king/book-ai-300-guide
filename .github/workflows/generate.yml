@@ -3,7 +3,7 @@ name: 구조 자동 생성
 on:
   push:
     branches: [main]
-    paths: ["structure.yaml", "templates/**", "generate.py", "[0-9][0-9]-*/**.md"]
+    paths: ["structure.yaml", "templates/**", "generate.py", "pages/**"]
   workflow_dispatch:
 permissions:
   contents: write
