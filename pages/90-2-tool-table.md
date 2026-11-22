@@ -23,6 +23,12 @@
 | 코딩 AI | Claude Code, Cursor, GitHub Copilot, Codex | 여러 파일 수정, 코드 실행 | 실행 결과 확인, 권한 관리 | 05-4 |
 | 이미지 AI | 대화형 AI 이미지 생성, Midjourney, Ideogram, Adobe Firefly | 삽화·홍보물 시안 | 저작권·상표, 상업 이용 약관 | 05-5 |
 | 업무 자동화 | Zapier, Make, n8n | 서비스 연결, 반복 작업 자동화 | 오류 알림, 사람 확인 단계 | 05-6 |
+| 문서·오피스 AI | Microsoft 365 Copilot, Gemini (Workspace), Notion AI | 작업 중인 문서·메일·시트 안에서 바로 사용 | 라이선스, 문서 접근 권한 | 10-1 |
+| 프레젠테이션·디자인 | Gamma, Canva, PowerPoint Copilot, Google Slides + Gemini | 슬라이드·카드뉴스 초안과 디자인 | 구성은 사람이, 이미지 이용 조건 | 10-2 |
+| 영상 AI | Veo, Kling, Runway, Luma, HeyGen, Synthesia | 장면 생성, 아바타 교육 영상 | 실존 인물 금지, 상업 이용 조건 | 10-3 |
+| 음성·음악 AI | ElevenLabs, Suno | 내레이션, 배경 음악 | 요금제별 상업 이용 권리, 목소리 복제 제한 | 10-4 |
+| 회의·받아쓰기 | 클로바노트, 다글로, 티로, Otter, Fireflies | 회의 기록·요약·할 일 추출 | 녹음 동의, 한국어 정확도 | 10-5 |
+| 번역 | DeepL, 파파고, 구글 번역 | 문서·메일·현장 번역, 용어집 | 숫자·계약서는 검수 | 10-6 |
 
 ## 같은 유형 안에서 고르는 기준
 
