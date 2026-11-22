@@ -2,11 +2,11 @@
 """structure.yaml 을 읽어 위키독스(GitHub 연동) 책 구조를 자동 생성합니다.
 
 위키독스 GitHub 연동 형식 (pahkey/github-wikidocs 기준):
-- TOC.md : '# 목차' + '* [제목](pages/파일.md)' , 하위는 2칸 들여쓰기
+- TOC.md : '# 목차' + '- [제목](pages/파일.md)' , 하위는 2칸 들여쓰기 (같은 단계는 제목 이름순 정렬)
 - pages/ : 모든 페이지를 한 폴더에 (01-장.md, 01-1-페이지.md ...)
 - 페이지 본문에는 H1 제목을 쓰지 않음 (제목은 TOC 에서 가져옴)
 - README.md : 독자에게 보이는 책 소개
-- assets/ : 이미지 (본문에서 ./assets/파일.png 로 참조)
+- assets/ : 이미지 (페이지에서는 ../assets/파일.png, README 에서는 ./assets/파일.png)
 
 사용법:
     python generate.py            # 페이지 생성 + TOC.md / README.md / 진행현황 갱신
@@ -109,12 +109,12 @@ def build_toc(data: dict, statuses: dict[str, str]) -> str:
     lines = ["# 목차", ""]
     for ch in data["chapters"]:
         children = [
-            f"  * [{page_title(ch, i, p)}]({page_path(ch, i, p)})"
+            f"  - [{page_title(ch, i, p)}]({page_path(ch, i, p)})"
             for i, p in enumerate(ch.get("pages", []), 1)
             if is_public(statuses[page_path(ch, i, p)], show)
         ]
         if children or show:
-            lines.append(f"* [{chapter_title(ch)}]({chapter_path(ch)})")
+            lines.append(f"- [{chapter_title(ch)}]({chapter_path(ch)})")
             lines += children
     return "\n".join(lines) + "\n"
 
