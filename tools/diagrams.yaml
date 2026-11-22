@@ -315,3 +315,30 @@ diagrams:
       - { icon: "⚖️", title: 법·규정, desc: "최신 원문과\n전문가 확인", color: blue }
       - { icon: "🔐", title: 민감정보, desc: "개인정보·기밀이\n남아 있지 않은지", color: teal }
       - { icon: "🗣️", title: 어조·대상, desc: "읽는 사람에게\n맞는 말투인지", color: green }
+
+  # ---------- 10장 장르별 AI 도구 ----------
+  - file: ch10-genre-map.png
+    kicker: CHAPTER 10 · 장르별 AI 도구
+    layout: cards
+    columns: 3
+    title: 일의 *장르*에 맞는 AI 도구
+    subtitle: 대화형 AI로 시작하고, 장르별 전문 도구로 결과물의 완성도를 높입니다
+    cards:
+      - { icon: "📄", title: 문서·오피스, desc: "Microsoft 365 Copilot\nGemini (Workspace)\nNotion AI", color: blue }
+      - { icon: "📊", title: 프레젠테이션·디자인, desc: "Gamma · Canva\nPowerPoint Copilot\nGoogle Slides + Gemini", color: purple }
+      - { icon: "🎬", title: 영상, desc: "Veo · Kling · Runway\nHeyGen · Synthesia", color: red }
+      - { icon: "🎧", title: 음성·음악, desc: "ElevenLabs\nSuno", color: orange }
+      - { icon: "🗒️", title: 회의·받아쓰기, desc: "클로바노트 · 다글로\n티로 · Otter · Fireflies", color: teal }
+      - { icon: "🌏", title: 번역, desc: "DeepL · 파파고\n구글 번역", color: green }
+    note: "도구 이름·기능·요금은 자주 바뀝니다 — 최종 확인 날짜를 보고 공식 사이트에서 다시 확인하세요"
+
+  - file: p10-7-job-cases.png
+    kicker: 10-7 · 직무별 도구 조합
+    layout: stack
+    title: 직무별 *AI 도구 조합* 예시
+    layers:
+      - { icon: "📣", title: 마케터, desc: "검색형 AI(시장 조사) → 대화형 AI(카피) → Canva(소재) → 영상 AI(숏폼)", color: pink }
+      - { icon: "🧑‍🏫", title: 교사·강사, desc: "NotebookLM(자료 정리) → Gamma(수업 슬라이드) → 대화형 AI(퀴즈) → 번역 AI(다국어 안내)", color: indigo }
+      - { icon: "🧑‍💼", title: 영업·기획, desc: "클로바노트(미팅 기록) → Copilot/Gemini(제안서) → DeepL(해외 메일)", color: blue }
+      - { icon: "🛍️", title: 1인 창업자, desc: "대화형 AI(상품 설명) → 이미지 AI(상세 이미지) → ElevenLabs(내레이션) → 자동화(주문 알림)", color: amber }
+      - { icon: "🔬", title: 연구자, desc: "딥 리서치(문헌) → NotebookLM(논문 비교) → 코딩 AI(분석) → 대화형 AI(초록 다듬기)", color: teal }
