@@ -209,3 +209,109 @@ diagrams:
       - { icon: "📊", title: 기록, desc: "스프레드시트에\n한 줄 추가", color: teal }
       - { icon: "🔔", title: 알림, desc: "'긴급'이면\n담당자에게 알림", color: red }
     note: "처음에는 고객에게 바로 보내지 말고, 사람이 확인하는 단계를 넣으세요"
+
+  # ---------- 03·04·06~09장 페이지 이미지 ----------
+  - file: p03-1-step-by-step.png
+    kicker: 03-1 · 단계별로 생각하게 하기
+    layout: compare
+    title: 바로 답하기 vs *단계별로 생각하기*
+    subtitle: "문제: 3개에 4,500원인 사과를 7개 사고 10% 할인받으면?"
+    left:
+      title: "\"답만 알려 줘\""
+      items:
+        - "답: 9,450원"
+        - "중간 과정이 없어 틀려도 알아채기 어려움"
+        - "복잡한 문제일수록 실수가 늘어남"
+    right:
+      title: "\"단계별로 풀어 줘\""
+      items:
+        - "① 1개 가격 = 4,500 ÷ 3 = 1,500원"
+        - "② 7개 = 1,500 × 7 = 10,500원"
+        - "③ 10% 할인 = 10,500 × 0.9 = 9,450원"
+    note: "과정을 보이게 하면 정확도가 오르고, 어디서 틀렸는지도 바로 찾을 수 있습니다"
+
+  - file: p03-5-chaining.png
+    kicker: 03-5 · 단계를 나눠 연결하기
+    layout: flow
+    title: 큰 일은 *나눠서 이어 붙이기*
+    subtitle: "예시: 신제품 소개 블로그 글 쓰기"
+    steps:
+      - { icon: "🔎", title: 자료 정리, desc: "제품 자료에서\n핵심 특징 7개 추출", color: blue }
+      - { icon: "🎯", title: 독자 분석, desc: "읽을 사람과\n궁금해할 점 정리", color: purple }
+      - { icon: "🗂️", title: 개요, desc: "소제목 5개와\n각 핵심 메시지", color: teal }
+      - { icon: "✍️", title: 초안, desc: "소제목별로\n본문 작성", color: orange }
+      - { icon: "🔍", title: 다듬기, desc: "분량·어조 점검\n제목 후보 5개", color: green }
+    note: "단계마다 결과를 확인하고 고친 뒤 다음 단계로 넘기면 품질이 크게 좋아집니다"
+
+  - file: p03-6-structured.png
+    kicker: 03-6 · 구조화된 출력
+    layout: compare
+    title: 자유로운 답 vs *구조화된 답*
+    subtitle: "요청: 고객 리뷰 3개의 감정과 주제를 분석해 줘"
+    left:
+      title: 형식을 정하지 않으면
+      items:
+        - "첫 번째 리뷰는 대체로 긍정적인데…"
+        - "매번 문장 길이와 순서가 다름"
+        - "엑셀·프로그램으로 바로 옮기기 어려움"
+    right:
+      title: 표·JSON으로 받으면
+      items:
+        - "| 리뷰 | 감정 | 주제 | 근거 |"
+        - "{\"감정\": \"부정\", \"주제\": \"배송\"}"
+        - "그대로 엑셀·자동화에 연결"
+
+  - file: p04-recipe-anatomy.png
+    kicker: 04 · 업무별 프롬프트 레시피
+    layout: stack
+    title: 레시피 한 장의 *구성*
+    subtitle: 모든 레시피는 같은 순서로 되어 있어 필요한 부분만 바로 찾을 수 있습니다
+    layers:
+      - { icon: "🎯", title: 이럴 때 쓰세요, desc: "어떤 상황에서 쓰는 레시피인지", color: blue }
+      - { icon: "⏱️", title: 효과 비교, desc: "AI 없이 할 때와 AI를 쓸 때의 시간·결과 비교 (예상치)", color: purple }
+      - { icon: "📋", title: 프롬프트, desc: "빈칸만 채우면 되는 복사용 프롬프트", color: teal }
+      - { icon: "🧪", title: 입력·결과 예시, desc: "실제로 어떤 결과가 나오는지 보여 주는 예시", color: orange }
+      - { icon: "💡", title: 팁과 주의점, desc: "더 잘 쓰는 방법과 피해야 할 실수", color: green }
+
+  - file: p06-2-this-series.png
+    kicker: 06-2 · 이 시리즈를 AI로 만든 과정
+    layout: flow
+    title: 책 한 권을 *AI와 함께* 만든 과정
+    steps:
+      - { icon: "🧭", title: 기획, desc: "주제·독자·목차를\n대화로 정리", color: blue }
+      - { icon: "🏗️", title: 구조 자동화, desc: "목차 파일 하나로\n페이지·목차 생성", color: purple }
+      - { icon: "✍️", title: 집필, desc: "장별 초안 작성\n출처 검색·확인", color: teal }
+      - { icon: "🎨", title: 시각화, desc: "글로 적은 내용을\n설명 이미지로", color: orange }
+      - { icon: "🙋", title: 검토·발행, desc: "사람이 검토 후\nPR merge → 공개", color: red }
+    note: "AI가 속도를 높이고, 사람은 방향을 정하고 사실을 확인합니다"
+
+  - file: p07-1-chat-vs-agent.png
+    kicker: 07-1 · AI 에이전트란
+    layout: compare
+    tone: neutral
+    title: 대화형 AI와 *AI 에이전트*
+    left:
+      title: 대화형 AI
+      items:
+        - "질문 한 번에 답 한 번"
+        - "다음 단계는 사람이 지시"
+        - "결과를 사람이 옮겨 붙임"
+    right:
+      title: AI 에이전트
+      items:
+        - "목표를 받으면 스스로 단계를 계획"
+        - "검색·파일·앱 등 도구를 직접 사용"
+        - "결과를 확인하고 필요하면 다시 시도"
+
+  - file: p08-3-verify.png
+    kicker: 08-3 · 결과 검증 체크리스트
+    layout: cards
+    columns: 3
+    title: 내보내기 전 *검증 6단계*
+    cards:
+      - { icon: "🔢", title: 숫자·날짜, desc: "원문·계산기로\n다시 확인", color: red }
+      - { icon: "👤", title: 이름·직함, desc: "사람·회사·제품\n이름 철자 확인", color: orange }
+      - { icon: "🔗", title: 출처·링크, desc: "링크를 직접 열어\n내용이 있는지 확인", color: purple }
+      - { icon: "⚖️", title: 법·규정, desc: "최신 원문과\n전문가 확인", color: blue }
+      - { icon: "🔐", title: 민감정보, desc: "개인정보·기밀이\n남아 있지 않은지", color: teal }
+      - { icon: "🗣️", title: 어조·대상, desc: "읽는 사람에게\n맞는 말투인지", color: green }
