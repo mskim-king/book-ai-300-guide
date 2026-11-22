@@ -6,6 +6,7 @@
 - 페이지는 모두 `pages/` 에 둡니다. 파일명 `{장번호}-{순번}-{slug}.md`, 장 페이지는 `{장번호}-{slug}.md`.
 - 페이지 본문에 H1(`# 제목`)을 쓰지 않습니다. 제목은 `TOC.md` 에서 가져옵니다. 본문은 `##` 부터.
 - 이미지는 `assets/` 에 두고 페이지에서는 `![설명](../assets/파일.png)`, README 에서는 `./assets/` 로 참조합니다.
+- 설명 이미지는 `tools/diagrams.yaml` 수정 후 `python tools/build_diagrams.py` 로 생성(직접 그린 PNG 를 덮어쓰지 말 것).
 - 위키독스 전용 문법: `[[TIP]]…[[/TIP]]`(팁 상자), `[[TIP("제목")]]`, `[[SubPages]]`(하위 페이지 목록), `[TOC]`(페이지 내 목차). 자세한 스타일은 `_관리/스타일가이드.md`.
 - `TOC.md`·`README.md`·`_관리/진행현황.md` 는 `generate.py` 가 만듭니다. 직접 고치지 말고 `structure.yaml` 수정 후 `python generate.py` 실행.
 - TOC 에 없는 파일은 위키독스에 나오지 않습니다. 상태가 '작성 중'인 페이지는 TOC 에서 자동 제외됩니다.
