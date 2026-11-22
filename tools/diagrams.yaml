@@ -1,0 +1,317 @@
+# 책에 들어가는 설명 이미지 정의
+# 글자를 고친 뒤 `python tools/build_diagrams.py` 를 실행하면 assets/ 의 PNG 가 다시 만들어집니다.
+#
+# layout 종류
+#   flow    : 단계가 화살표로 이어지는 흐름 (steps)
+#   cards   : 카드 여러 장 (cards, columns)
+#   compare : 왼쪽(나쁜 예)과 오른쪽(좋은 예) 비교 (left, right)
+#   matrix  : 2x2 판단표 (x_axis, y_axis, cells)
+#   spectrum / triple / stack : 스펙트럼 · 관계 그래프 · 계층 (tools/build_diagrams.py 설명 참고)
+# 제목에서 *강조* 로 감싼 부분은 그라데이션으로 강조됩니다. kicker 는 그림 위 작은 라벨입니다.
+# 공통: file, title, subtitle(선택), note(선택, 아래 강조 띠)
+# 색 이름: blue, green, orange, purple, red, teal, gray
+
+theme:
+  book: AI 300% 활용법
+  primary: indigo
+  secondary: cyan
+
+diagrams:
+  # ---------- 장 대표 이미지 ----------
+  - file: ch01-llm-flow.png
+    kicker: CHAPTER 01 · AI 이해하기
+    layout: flow
+    title: AI는 이렇게 *답을 만듭니다*
+    subtitle: 정답을 찾아오는 것이 아니라, 그럴듯한 다음 말을 이어 붙입니다
+    steps:
+      - { icon: "📥", title: 읽기, desc: "내 질문과\n이전 대화 전체", color: blue }
+      - { icon: "🎲", title: 예측, desc: "다음에 올 말의\n확률 계산", color: purple }
+      - { icon: "✍️", title: 고르기, desc: "가장 그럴듯한\n말 하나 선택", color: teal }
+      - { icon: "🔁", title: 반복, desc: "답이 끝날 때까지\n2~3단계 반복", color: orange }
+      - { icon: "💬", title: 답 완성, desc: "자연스럽지만\n틀릴 수도 있는 답", color: green }
+    note: "그래서 ① 재료(프롬프트)를 충분히 주고 ② 결과를 검증해야 합니다"
+
+  - file: ch02-five-elements.png
+    kicker: CHAPTER 02 · 프롬프트 기본기
+    layout: cards
+    columns: 5
+    title: 좋은 프롬프트의 *5요소*
+    subtitle: 결과가 아쉬우면 빠진 요소를 하나씩 채워 보세요
+    cards:
+      - { icon: "🎭", title: 역할, desc: "누구의 관점으로?\n\n예) 10년 차\n인사 담당자", color: blue }
+      - { icon: "🧭", title: 맥락, desc: "어떤 상황인가?\n\n예) 신입 50명,\n첫날 20분 발표", color: purple }
+      - { icon: "🎯", title: 과제, desc: "무엇을 할까?\n\n예) 회사 소개\n발표 개요 작성", color: red }
+      - { icon: "📐", title: 형식, desc: "어떤 모양으로?\n\n예) 슬라이드 5장,\n장마다 3줄", color: teal }
+      - { icon: "🧩", title: 예시, desc: "견본이 있나?\n\n예) 슬라이드 1:\n우리가 하는 일", color: orange }
+    note: "효과가 가장 큰 것은 '맥락' — 대상·목적·제약을 먼저 적으세요"
+
+  - file: ch03-advanced.png
+    kicker: CHAPTER 03 · 프롬프트 고급
+    layout: cards
+    columns: 3
+    title: 프롬프트 *고급 기법* 6가지
+    subtitle: 복잡한 일일수록 한 번에 시키지 말고 나누고, 보여 주고, 점검하게 합니다
+    cards:
+      - { icon: "🪜", title: 단계별로 생각하기, desc: "답 전에 풀이 과정을\n먼저 쓰게 하기", color: blue }
+      - { icon: "🧩", title: 예시로 가르치기, desc: "원하는 결과의 견본을\n2~3개 보여 주기", color: purple }
+      - { icon: "📚", title: 긴 문서 다루기, desc: "자료는 위에, 질문은 아래\n필요한 부분 인용 먼저", color: teal }
+      - { icon: "🔍", title: 스스로 검토하기, desc: "답을 다시 읽고\n틀린 곳 찾게 하기", color: orange }
+      - { icon: "🔗", title: 단계 나눠 연결하기, desc: "조사 → 개요 → 초안 →\n다듬기를 따로 요청", color: green }
+      - { icon: "🗂️", title: 구조화된 출력, desc: "표·JSON 등 정해진\n형식으로 받기", color: red }
+
+  - file: ch04-recipe.png
+    kicker: CHAPTER 04 · 업무별 프롬프트 레시피
+    layout: flow
+    title: 프롬프트 *레시피* 사용법
+    subtitle: 복사 → 내 상황으로 채우기 → 실행 → 다듬기 → 저장
+    steps:
+      - { icon: "📋", title: 복사, desc: "업무에 맞는\n레시피 고르기", color: blue }
+      - { icon: "✏️", title: 채우기, desc: "빈칸(______)에\n내 상황 입력", color: purple }
+      - { icon: "▶️", title: 실행, desc: "AI에 붙여 넣고\n결과 받기", color: teal }
+      - { icon: "🛠️", title: 다듬기, desc: "유지할 것·바꿀 것\n알려 주기", color: orange }
+      - { icon: "💾", title: 저장, desc: "잘 된 프롬프트는\n내 레시피로 보관", color: green }
+    note: "레시피 구성: 이럴 때 쓰세요 · 효과 비교 · 프롬프트 · 입력/결과 예시 · 팁 · 주의할 점"
+
+  - file: ch05-tool-map.png
+    kicker: CHAPTER 05 · AI 도구 지도
+    layout: cards
+    columns: 3
+    title: AI 도구 지도 — *이름보다 유형*으로
+    subtitle: 하고 싶은 일에서 출발해 도구 유형을 고르세요
+    cards:
+      - { icon: "💬", title: 대화형 AI, desc: "글쓰기·요약·분석\nChatGPT · Claude · Gemini", color: blue }
+      - { icon: "🔎", title: 검색·리서치 AI, desc: "최신 정보·사실 확인\nPerplexity · 딥 리서치", color: purple }
+      - { icon: "📒", title: 문서·노트 AI, desc: "내 자료 안에서만 답함\nNotebookLM · 프로젝트", color: teal }
+      - { icon: "💻", title: 코딩 AI, desc: "스크립트·개발\nClaude Code · Cursor · Copilot", color: gray }
+      - { icon: "🎨", title: 이미지·영상·음성, desc: "삽화·홍보물·받아쓰기\nMidjourney · Ideogram 등", color: orange }
+      - { icon: "⚙️", title: 업무 자동화, desc: "반복 작업 자동 실행\nZapier · Make · n8n", color: green }
+    note: "추천 순서: 대화형 → 검색형 → 문서형 → 자동화 (도구 이름은 자주 바뀝니다)"
+
+  - file: ch06-workflow.png
+    kicker: CHAPTER 06 · 도구 조합 워크플로
+    layout: flow
+    title: 도구를 *이어 쓰는* 워크플로
+    subtitle: "예시: 시장 조사 보고서 만들기"
+    steps:
+      - { icon: "🔎", title: 찾기, desc: "검색형 AI로\n믿을 만한 자료 찾기", color: purple }
+      - { icon: "📒", title: 분석, desc: "문서 AI에 원문을 넣고\n핵심·근거 정리", color: teal }
+      - { icon: "💬", title: 작성, desc: "대화형 AI로\n보고서 초안 작성", color: blue }
+      - { icon: "🎨", title: 시각화, desc: "이미지 AI로\n표지·도식 만들기", color: orange }
+      - { icon: "🙋", title: 확인, desc: "사람이 사실 확인\n후 최종 결정", color: red }
+    note: "각 단계의 결과물을 다음 단계의 입력으로 넘기는 것이 핵심입니다"
+
+  - file: ch07-agent-loop.png
+    kicker: CHAPTER 07 · AI 에이전트와 자동화
+    layout: flow
+    title: AI *에이전트*는 이렇게 일합니다
+    subtitle: 한 번 답하고 끝나는 것이 아니라, 목표를 이룰 때까지 스스로 단계를 밟습니다
+    steps:
+      - { icon: "🎯", title: 목표 받기, desc: "사람이 할 일과\n완료 조건 제시", color: blue }
+      - { icon: "🗺️", title: 계획, desc: "필요한 단계를\n스스로 나누기", color: purple }
+      - { icon: "🧰", title: 도구 사용, desc: "검색·파일·앱 등\n도구 실행", color: teal }
+      - { icon: "✅", title: 결과 확인, desc: "목표에 맞는지\n점검 후 다시 시도", color: orange }
+      - { icon: "📨", title: 보고, desc: "결과와 근거를\n사람에게 전달", color: green }
+    note: "중요한 실행(보내기·삭제·결제) 전에는 사람이 승인하도록 설정하세요"
+
+  - file: ch08-safety.png
+    kicker: CHAPTER 08 · 안전하게 쓰기
+    layout: compare
+    title: AI에 입력하기 *전에* 바꾸세요
+    subtitle: 개인정보·기밀은 지우거나 바꿔서 넣습니다
+    left:
+      title: 그대로 넣으면 위험
+      items:
+        - "홍길동 고객(010-1234-5678) 불만 내용"
+        - "주민등록번호·계좌번호가 있는 서류"
+        - "발표 전 실적 수치, 계약 금액"
+        - "고객사 이름이 들어간 내부 보고서"
+    right:
+      title: 이렇게 바꿔서 입력
+      items:
+        - "A 고객(연락처 삭제) 불만 내용"
+        - "번호 부분을 지운 서류 양식"
+        - "실제 값 대신 예시 숫자"
+        - "고객사 → '제조업 고객사 B'"
+    note: "회사에서 허용한 도구·요금제인지, 입력이 학습에 쓰이지 않는지 먼저 확인하세요"
+
+  - file: ch09-monthly-update.png
+    kicker: CHAPTER 09 · 최신 동향
+    layout: flow
+    title: 최신 동향을 따라가는 *월간 루틴*
+    subtitle: AI 도구는 매달 바뀝니다 — 한 달에 한 번, 1시간이면 충분합니다
+    steps:
+      - { icon: "📰", title: 모으기, desc: "새 모델·새 기능\n소식 메모", color: purple }
+      - { icon: "🧪", title: 시험하기, desc: "내 업무 프롬프트로\n직접 써 보기", color: teal }
+      - { icon: "📝", title: 기록하기, desc: "좋아진 점·바뀐 점\n업데이트 노트", color: blue }
+      - { icon: "🔄", title: 바꾸기, desc: "더 나은 도구·방법으로\n내 레시피 갱신", color: green }
+    note: "새 도구를 모두 쓸 필요는 없습니다 — 내 업무에 효과가 확인된 것만 바꾸세요"
+
+  - file: ch90-appendix.png
+    kicker: 부록
+    layout: cards
+    columns: 3
+    title: 부록 *활용법*
+    subtitle: 필요할 때 바로 찾아 쓰는 도구 상자
+    cards:
+      - { icon: "🧾", title: 프롬프트 템플릿, desc: "빈칸만 채우면 되는\n업무별 기본 틀", color: blue }
+      - { icon: "📊", title: 도구 비교표, desc: "유형·강점·주의점을\n한 장으로 비교", color: teal }
+      - { icon: "📖", title: 용어집, desc: "LLM·토큰·환각 등\n자주 나오는 말 풀이", color: orange }
+
+  # ---------- 페이지 안 설명 이미지 ----------
+  - file: p01-2-delegate-matrix.png
+    kicker: 01-2 · AI가 잘하는 일과 못하는 일
+    layout: matrix
+    title: AI에게 *맡겨도 될까?* 판단표
+    x_axis: [틀려도 피해가 작음, 틀리면 피해가 큼]
+    y_axis: [내가 검토할 수 있음, 내가 검토하기 어려움]
+    cells:
+      - { icon: "✅", title: 적극 활용, desc: "아이디어 · 초안 · 요약", color: green }
+      - { icon: "⚠️", title: 활용 + 꼼꼼히 확인, desc: "보고서 · 대외 문서", color: orange }
+      - { icon: "⚠️", title: 참고용으로만, desc: "낯선 분야 공부", color: orange }
+      - { icon: "❌", title: 전문가 확인 필수, desc: "법률 · 의료 · 투자 판단", color: red }
+
+  - file: p01-3-verify-steps.png
+    kicker: 01-3 · 환각과 검증하는 습관
+    layout: flow
+    title: AI 답을 쓰기 전 *검증 3단계*
+    steps:
+      - { icon: "🖍️", title: 1. 표시하기, desc: "사실·수치·이름·날짜·\n출처에 표시", color: orange }
+      - { icon: "🔗", title: 2. 확인하기, desc: "공식 사이트·원문과\n하나씩 대조", color: blue }
+      - { icon: "⚖️", title: 3. 판단하기, desc: "확인 못 한 내용은\n빼거나 '확인 필요'", color: green }
+    note: "자신 있는 말투는 정확하다는 뜻이 아닙니다"
+
+  - file: p02-3-feedback.png
+    kicker: 02-3 · 대화로 결과 다듬기
+    layout: compare
+    title: 결과를 고치는 *피드백*
+    left:
+      title: 막연한 피드백
+      items:
+        - "별로야. 다시 써 줘."
+        - "좀 더 좋게 해 줘."
+        - "이상해."
+    right:
+      title: 구체적인 피드백
+      items:
+        - "유지: 전체 구성은 좋아, 나머지는 그대로"
+        - "바꿀 곳: 첫 문단, 세 번째 근거"
+        - "방향: 2문장으로, 비용 절감 사례로"
+    note: "유지할 것 · 바꿀 것 · 바꾸는 방향 — 세 가지를 말하면 한 번에 고쳐집니다"
+
+  - file: p05-6-automation.png
+    kicker: 05-6 · 업무 자동화 도구
+    layout: flow
+    title: "자동화 예시: *고객 문의 자동 분류*"
+    subtitle: 트리거(언제) → 액션(무엇을), AI는 액션 중 하나로 들어갑니다
+    steps:
+      - { icon: "📩", title: 트리거, desc: "문의 폼에\n새 응답 도착", color: purple }
+      - { icon: "🤖", title: AI 분류, desc: "분류·긴급도·요약을\nJSON으로", color: blue }
+      - { icon: "📊", title: 기록, desc: "스프레드시트에\n한 줄 추가", color: teal }
+      - { icon: "🔔", title: 알림, desc: "'긴급'이면\n담당자에게 알림", color: red }
+    note: "처음에는 고객에게 바로 보내지 말고, 사람이 확인하는 단계를 넣으세요"
+
+  # ---------- 03·04·06~09장 페이지 이미지 ----------
+  - file: p03-1-step-by-step.png
+    kicker: 03-1 · 단계별로 생각하게 하기
+    layout: compare
+    title: 바로 답하기 vs *단계별로 생각하기*
+    subtitle: "문제: 3개에 4,500원인 사과를 7개 사고 10% 할인받으면?"
+    left:
+      title: "\"답만 알려 줘\""
+      items:
+        - "답: 9,450원"
+        - "중간 과정이 없어 틀려도 알아채기 어려움"
+        - "복잡한 문제일수록 실수가 늘어남"
+    right:
+      title: "\"단계별로 풀어 줘\""
+      items:
+        - "① 1개 가격 = 4,500 ÷ 3 = 1,500원"
+        - "② 7개 = 1,500 × 7 = 10,500원"
+        - "③ 10% 할인 = 10,500 × 0.9 = 9,450원"
+    note: "과정을 보이게 하면 정확도가 오르고, 어디서 틀렸는지도 바로 찾을 수 있습니다"
+
+  - file: p03-5-chaining.png
+    kicker: 03-5 · 단계를 나눠 연결하기
+    layout: flow
+    title: 큰 일은 *나눠서 이어 붙이기*
+    subtitle: "예시: 신제품 소개 블로그 글 쓰기"
+    steps:
+      - { icon: "🔎", title: 자료 정리, desc: "제품 자료에서\n핵심 특징 7개 추출", color: blue }
+      - { icon: "🎯", title: 독자 분석, desc: "읽을 사람과\n궁금해할 점 정리", color: purple }
+      - { icon: "🗂️", title: 개요, desc: "소제목 5개와\n각 핵심 메시지", color: teal }
+      - { icon: "✍️", title: 초안, desc: "소제목별로\n본문 작성", color: orange }
+      - { icon: "🔍", title: 다듬기, desc: "분량·어조 점검\n제목 후보 5개", color: green }
+    note: "단계마다 결과를 확인하고 고친 뒤 다음 단계로 넘기면 품질이 크게 좋아집니다"
+
+  - file: p03-6-structured.png
+    kicker: 03-6 · 구조화된 출력
+    layout: compare
+    title: 자유로운 답 vs *구조화된 답*
+    subtitle: "요청: 고객 리뷰 3개의 감정과 주제를 분석해 줘"
+    left:
+      title: 형식을 정하지 않으면
+      items:
+        - "첫 번째 리뷰는 대체로 긍정적인데…"
+        - "매번 문장 길이와 순서가 다름"
+        - "엑셀·프로그램으로 바로 옮기기 어려움"
+    right:
+      title: 표·JSON으로 받으면
+      items:
+        - "| 리뷰 | 감정 | 주제 | 근거 |"
+        - "{\"감정\": \"부정\", \"주제\": \"배송\"}"
+        - "그대로 엑셀·자동화에 연결"
+
+  - file: p04-recipe-anatomy.png
+    kicker: 04 · 업무별 프롬프트 레시피
+    layout: stack
+    title: 레시피 한 장의 *구성*
+    subtitle: 모든 레시피는 같은 순서로 되어 있어 필요한 부분만 바로 찾을 수 있습니다
+    layers:
+      - { icon: "🎯", title: 이럴 때 쓰세요, desc: "어떤 상황에서 쓰는 레시피인지", color: blue }
+      - { icon: "⏱️", title: 효과 비교, desc: "AI 없이 할 때와 AI를 쓸 때의 시간·결과 비교 (예상치)", color: purple }
+      - { icon: "📋", title: 프롬프트, desc: "빈칸만 채우면 되는 복사용 프롬프트", color: teal }
+      - { icon: "🧪", title: 입력·결과 예시, desc: "실제로 어떤 결과가 나오는지 보여 주는 예시", color: orange }
+      - { icon: "💡", title: 팁과 주의점, desc: "더 잘 쓰는 방법과 피해야 할 실수", color: green }
+
+  - file: p06-2-this-series.png
+    kicker: 06-2 · 이 시리즈를 AI로 만든 과정
+    layout: flow
+    title: 책 한 권을 *AI와 함께* 만든 과정
+    steps:
+      - { icon: "🧭", title: 기획, desc: "주제·독자·목차를\n대화로 정리", color: blue }
+      - { icon: "🏗️", title: 구조 자동화, desc: "목차 파일 하나로\n페이지·목차 생성", color: purple }
+      - { icon: "✍️", title: 집필, desc: "장별 초안 작성\n출처 검색·확인", color: teal }
+      - { icon: "🎨", title: 시각화, desc: "글로 적은 내용을\n설명 이미지로", color: orange }
+      - { icon: "🙋", title: 검토·발행, desc: "사람이 검토 후\nPR merge → 공개", color: red }
+    note: "AI가 속도를 높이고, 사람은 방향을 정하고 사실을 확인합니다"
+
+  - file: p07-1-chat-vs-agent.png
+    kicker: 07-1 · AI 에이전트란
+    layout: compare
+    tone: neutral
+    title: 대화형 AI와 *AI 에이전트*
+    left:
+      title: 대화형 AI
+      items:
+        - "질문 한 번에 답 한 번"
+        - "다음 단계는 사람이 지시"
+        - "결과를 사람이 옮겨 붙임"
+    right:
+      title: AI 에이전트
+      items:
+        - "목표를 받으면 스스로 단계를 계획"
+        - "검색·파일·앱 등 도구를 직접 사용"
+        - "결과를 확인하고 필요하면 다시 시도"
+
+  - file: p08-3-verify.png
+    kicker: 08-3 · 결과 검증 체크리스트
+    layout: cards
+    columns: 3
+    title: 내보내기 전 *검증 6단계*
+    cards:
+      - { icon: "🔢", title: 숫자·날짜, desc: "원문·계산기로\n다시 확인", color: red }
+      - { icon: "👤", title: 이름·직함, desc: "사람·회사·제품\n이름 철자 확인", color: orange }
+      - { icon: "🔗", title: 출처·링크, desc: "링크를 직접 열어\n내용이 있는지 확인", color: purple }
+      - { icon: "⚖️", title: 법·규정, desc: "최신 원문과\n전문가 확인", color: blue }
+      - { icon: "🔐", title: 민감정보, desc: "개인정보·기밀이\n남아 있지 않은지", color: teal }
+      - { icon: "🗣️", title: 어조·대상, desc: "읽는 사람에게\n맞는 말투인지", color: green }
