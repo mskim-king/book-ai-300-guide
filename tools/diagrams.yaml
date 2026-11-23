@@ -146,6 +146,33 @@ diagrams:
       - { icon: "🔄", title: 바꾸기, desc: "더 나은 도구·방법으로\n내 레시피 갱신", color: green }
     note: "새 도구를 모두 쓸 필요는 없습니다 — 내 업무에 효과가 확인된 것만 바꾸세요"
 
+  - file: p09-3-model-families.png
+    kicker: 09-3 · 주요 LLM 모델 (2026년 11월)
+    layout: cards
+    columns: 3
+    title: 지금 *상위권* 모델 한눈에 보기
+    subtitle: 회사마다 '최상위 + 일상용' 두 단계로 모델을 나눠 내놓습니다
+    cards:
+      - { icon: "🟠", title: Anthropic Claude, desc: "Fable 5.2 · Opus 5.5\nSonnet 5.5 · Haiku 5.5\n코딩·에이전트·긴 문서", color: orange }
+      - { icon: "🟢", title: OpenAI GPT, desc: "GPT-6.2 Astra · Sol\nChatGPT·Codex\n어려운 프로젝트·범용", color: green }
+      - { icon: "🔵", title: Google Gemini, desc: "Gemini 4 Carbon · Argon\nWorkspace·검색 연동\n멀티모달·가성비", color: blue }
+      - { icon: "🟣", title: Meta Muse, desc: "Muse Wonder · Wonder Full\n텍스트·이미지·음성·영상 입력\n장기 기억", color: purple }
+      - { icon: "⚫", title: xAI Grok, desc: "Grok 4.7\nX(트위터) 연동\n낮은 단가", color: teal }
+      - { icon: "📦", title: 오픈 모델, desc: "Kimi · DeepSeek · GLM · Qwen\n국산: EXAONE · HyperCLOVA X\n직접 설치·데이터 통제", color: red }
+    note: "순위는 몇 주 단위로 바뀝니다 — 이름보다 '내 업무 시험 세트' 결과로 고르세요 (09-2)"
+
+  - file: p09-3-choose-matrix.png
+    kicker: 09-3 · 어떤 모델을 쓸까
+    layout: matrix
+    title: 일의 *난이도*와 *우선순위*로 고르기
+    x_axis: [간단·대량 작업, 어렵고 긴 작업]
+    y_axis: [비용·속도 우선, 품질 우선]
+    cells:
+      - { icon: "⚡", title: 가볍고 빠른 모델, desc: "Haiku 5.5 · 각 사 경량 모델\n분류 · 요약 · 대량 번역", color: green }
+      - { icon: "⚖️", title: 일상용 상위 모델, desc: "Sonnet 5.5 · GPT-6.2 Sol\nGemini 4 Argon", color: blue }
+      - { icon: "✍️", title: 범용 상위 모델, desc: "Opus 5.5 · Argon · Sol\n중요한 글 · 보고서", color: teal }
+      - { icon: "🧠", title: 최상위 모델, desc: "Fable 5.2 · GPT-6.2 Astra\nGemini 4 Carbon", color: purple }
+
   - file: ch90-appendix.png
     kicker: 부록
     layout: cards
