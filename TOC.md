@@ -46,6 +46,7 @@
 - [09. 최신 동향](pages/09-trends.md)
   - [09-1. 월간 업데이트 노트](pages/09-1-monthly.md)
   - [09-2. 주요 모델 변화](pages/09-2-models.md)
+  - [09-3. 주요 LLM 모델 순위와 특징 (2026년 11월)](pages/09-3-ranking.md)
 - [10. 장르별 AI 도구와 활용 사례](pages/10-genre-tools.md)
   - [10-1. 문서·오피스 AI (Copilot·Gemini·Notion AI)](pages/10-1-office.md)
   - [10-2. 프레젠테이션·디자인 AI (Gamma·Canva 등)](pages/10-2-presentation.md)

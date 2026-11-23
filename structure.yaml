@@ -109,6 +109,7 @@ chapters:
     pages:
       - { slug: monthly,  title: 월간 업데이트 노트, tags: [동향] }
       - { slug: models,   title: 주요 모델 변화, tags: [동향, 모델] }
+      - { slug: ranking,  title: 주요 LLM 모델 순위와 특징 (2026년 11월), tags: [동향, 모델, 비교] }
 
   - id: "10"
     slug: genre-tools
