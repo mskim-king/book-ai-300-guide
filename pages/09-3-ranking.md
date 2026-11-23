@@ -21,7 +21,7 @@
 
 ## 요약
 
-- 2026년 11월 현재 최상위권은 **Claude Fable 5.2(Anthropic)·GPT-6.2 Astra(OpenAI)·Gemini 4 Carbon(Google)** 세 모델입니다. 시험 점수 순위에서는 Fable 5.2, 사람 투표 순위에서는 Gemini 4 Carbon이 1위로 집계됩니다.
+- 2026년 11월 현재 최상위권은 **Claude Fable 5.2(Anthropic)·GPT-6.2 Astra(OpenAI)·Gemini 4 Carbon/Neon(Google)** 입니다. 시험 점수 순위 1위는 Fable 5.2(64.6), 사람 투표 순위 1위는 Gemini 4 Carbon(1538)입니다. (표 1·2)
 - 회사마다 **최상위 모델 + 일상용 모델** 두 단계로 나눠 내놓습니다. 대부분의 업무는 일상용 모델로 충분하고, 어렵고 긴 작업에만 최상위 모델을 씁니다.
 - 고르는 순서: **회사 허용 여부 → 내가 쓰는 도구와의 연동 → 시험 세트 결과 → 비용**.
 
@@ -33,7 +33,7 @@
 |---|---|---|---|---|
 | Anthropic | Claude Fable 5.2 | Claude Opus 5.5, Claude Sonnet 5.5 | Claude Haiku 5.5 | Claude 앱, Claude Code, API |
 | OpenAI | GPT-6.2 Astra | GPT-6.2 Sol | — | ChatGPT(Work), Codex, API |
-| Google | Gemini 4 Carbon | Gemini 4 Argon | — | Gemini 앱, 검색 AI 모드, Workspace, API |
+| Google | Gemini 4 Carbon | Gemini 4 Neon, Gemini 4 Argon | Gemini 4 Hydrogen | Gemini 앱, 검색 AI 모드, Workspace, API |
 | Meta | Muse Wonder Full | Muse Wonder | Muse Glimmer(오픈 모델) | Muse Code, Meta Model API |
 | xAI | Grok 4.7 | — | — | Grok 앱, X, API |
 
@@ -46,19 +46,57 @@
 | **Arena** (옛 LMArena, arena.ai) | 사람들이 두 모델의 답을 익명으로 비교해 투표 → 점수(Elo) | 사람이 **읽기에 좋은 답**을 내는 모델 | 말투·형식이 좋은 답이 유리, 신규 모델은 '잠정' 점수 |
 | **Artificial Analysis Intelligence Index** | 추론·지식·수학·코딩 등 여러 시험 점수를 합산 | **어려운 문제를 푸는 능력** | 시험 문제와 내 업무는 다를 수 있음 |
 
-### 2026년 11월 순위 스냅숏
+### 2026년 11월 LLM 순위표
 
-두 리더보드의 공식 사이트는 이 책 작업 환경에서 직접 열 수 없어, 여러 집계 사이트가 옮겨 적은 11월 중순 값을 교차 확인했습니다. 집계 사이트마다 1~2점씩 차이가 있으므로 **대략적인 위치**로만 보세요.
+![2026년 11월 LLM 순위표](../assets/p09-3-ranking-chart.png)
 
-| 순위(대략) | 시험 점수 순위 (Artificial Analysis) | 사람 투표 순위 (Arena 텍스트) |
-|---|---|---|
-| 1 | Claude Fable 5.2 (약 65) | Gemini 4 Carbon (잠정, 약 1,526) |
-| 2 | GPT-6.2 Astra (약 62) | Gemini 4 Argon (약 1,522) |
-| 3 | Gemini 4 Carbon (약 60) | 상위 5위 안: Muse Wonder, Claude Opus 5.5, Claude Fable 5 |
-| 4~5 | Claude Opus 5.5 (약 58), Muse Wonder Full·Claude Sonnet 5.5 (약 56) | 상위 10위 안에 Claude 계열 여러 모델 |
+#### 표 1. 사람 투표 순위 TOP 10 (Arena 텍스트, 2026-11-11 공식 스냅숏)
 
-- GPT-6.2(11월 17일 출시)는 출시 직후라 Arena 투표가 충분히 쌓이지 않았습니다. 11월 초 기준 Arena에서는 OpenAI 모델이 20위권 밖이었다는 집계가 있지만, 새 모델이 반영되면 달라질 수 있습니다.
-- 최신 값은 [Arena 리더보드](https://arena.ai/leaderboard)와 [Artificial Analysis](https://artificialanalysis.ai/leaderboards/models)에서 직접 확인하세요.
+Arena가 11월 11일 공개한 텍스트 리더보드(모델 421개, 누적 투표 약 912만 건)의 상위 10개입니다. 괄호 안의 High·Max는 모델이 생각하는 깊이(추론 강도) 설정입니다.
+
+| 순위 | 모델 | 회사 | 점수 (±오차) | 한 줄 특징 |
+|:---:|---|---|:---:|---|
+| 🥇 1 | Gemini 4 Carbon (High) | Google | 1538 ±10 | Google 최상위 모델, 어려운 다단계 작업 |
+| 🥈 2 | Gemini 4 Argon (High) | Google | 1529 ±5 | 코딩·지식 업무용 기본 모델, 가성비 |
+| 🥉 3 | Claude Opus 5.5 (High) | Anthropic | 1514 ±6 | 상위 범용 모델, 글쓰기·코딩 균형 |
+| 4 | Claude Fable 5.1 (Max) | Anthropic | 1512 ±5 | Fable 5.2의 이전 버전 |
+| 5 | Claude Opus 5 (Max) | Anthropic | 1507 ±5 | Opus 5.5의 이전 버전 |
+| 6 | Muse Wonder (Max) | Meta | 1503 ±6 | 음성·영상까지 입력, 장기 기억 |
+| 7 | Claude Opus 5 (High) | Anthropic | 1502 ±4 | 5위 모델의 추론 강도 낮은 설정 |
+| 8 | Gemini 4 Hydrogen (High) | Google | 1502 ±9 | Gemini 4 경량 모델 |
+| 9 | Claude Opus 4.6 (High) | Anthropic | 1501 ±3 | 이전 세대지만 여전히 상위권 |
+| 10 | Gemini 3.8 Flash (High) | Google | 1500 ±4 | 빠르고 저렴한 모델 |
+
+> 오차(±)가 겹치는 모델들은 사실상 같은 수준입니다. 예를 들어 3~10위는 14점 안에 모여 있습니다. 스냅숏 직전·직후에 나온 **Claude Fable 5.2(11/9), GPT-6.2(11/17), Gemini 4 Neon(11/18)** 은 이 표에 아직 없으며, 투표가 쌓이면 순위표에 들어올 예정입니다.
+
+#### 표 2. 시험 점수 순위 TOP 8 (Artificial Analysis Intelligence Index, 11월 중순)
+
+추론·지식·수학·코딩 시험 점수를 합산한 순위입니다. 공식 사이트에 직접 접속하지 못해 여러 집계 사이트의 11월 중순(v5.0.1) 값을 교차 확인했습니다. **(보도)** 는 회사 발표나 한 곳의 보도에서만 확인된 값입니다.
+
+| 순위 | 모델 | 회사 | 점수 | 출시 | 한 줄 특징 |
+|:---:|---|---|:---:|---|---|
+| 🥇 1 | Claude Fable 5.2 (Max) | Anthropic | 64.6 | 2026-11-09 | 시험 점수 1위, 코딩·추론·이미지 이해 개선 |
+| 🥈 2 | GPT-6.2 Astra | OpenAI | 62.1 | 2026-11-17 | 가장 어려운 프로젝트용 |
+| 🥉 3 | Gemini 4 Neon | Google | 약 61 (보도) | 2026-11-18 | Carbon과 Hydrogen 사이 중간 등급 |
+| 4 | Gemini 4 Carbon | Google | 60.0 | 2026-11-10 | Arena 1위, 시험 점수도 상위권 |
+| 5 | Claude Opus 5.5 | Anthropic | 약 59 | — | 두 순위 모두 상위권인 범용 모델 |
+| 6 | GPT-6.2 Sol | OpenAI | 약 57 (보도) | 2026-11-17 | 일상 업무용 효율 모델 |
+| 7 | Muse Wonder Full | Meta | 약 56 | 2026-10-12 | Muse Code 구독자 전용 |
+| 8 | Claude Sonnet 5.5 | Anthropic | 약 56 (보도) | — | 속도·성능 균형 |
+
+> 같은 모델도 추론 강도(Max·High 등)에 따라 점수가 달라집니다. 위 표는 회사별 가장 높은 설정의 점수입니다. Grok 4.7과 오픈 모델은 이 집계에서 상위 8위 밖입니다.
+
+#### 표 3. 두 순위로 보는 회사별 위치
+
+| 회사 | 시험 점수 최고 순위 | 사람 투표 최고 순위 | 한마디로 |
+|---|:---:|:---:|---|
+| Anthropic (Claude) | 1위 (Fable 5.2) | 3위 (Opus 5.5) | 두 순위 모두 상위권 모델이 가장 많음 |
+| OpenAI (GPT) | 2위 (GPT-6.2 Astra) | 집계 전 | 신모델 출시 직후, Arena 반영 대기 |
+| Google (Gemini) | 3위 (Gemini 4 Neon) | 1위 (Gemini 4 Carbon) | 사람 투표 1·2위, 가성비 |
+| Meta (Muse) | 7위 (Wonder Full) | 6위 (Muse Wonder) | 첫 최상위급 모델로 상위권 진입 |
+| xAI (Grok) | 상위권 밖 | 상위권 밖 | 낮은 단가, X 연동 |
+
+최신 값은 [Arena 리더보드](https://arena.ai/leaderboard/text)와 [Artificial Analysis](https://artificialanalysis.ai/leaderboards/models)에서 직접 확인하세요.
 
 [[TIP("순위표를 읽는 요령")]]
 
@@ -69,6 +107,25 @@
 [[/TIP]]
 
 ## 3. 모델별 특징과 장단점
+
+### 한눈에 보는 비교표
+
+| 모델 | 회사 | 등급 | 시험 점수 | 사람 투표 | 컨텍스트 창 | API 요금 (입력/출력, 100만 토큰) | 강점 | 약점 | 추천 용도 |
+|---|---|---|:---:|:---:|---|---|---|---|---|
+| Claude Fable 5.2 | Anthropic | 최상위 | **1위** 64.6 | 집계 전 | 100만 | $8 / $40 | 어려운 추론·코딩·장시간 에이전트 | 비싸고 느릴 수 있음 | 어려운 분석, 대규모 코드 작업 |
+| GPT-6.2 Astra | OpenAI | 최상위 | 2위 62.1 | 집계 전 | 약 105만 (보도) | $8 / $40 | 복잡한 프로젝트, ChatGPT·Codex 생태계 | 초기엔 일부 화면·유료 요금제만 | 웹·앱 시제품, 큰 프로젝트 |
+| Gemini 4 Carbon | Google | 최상위 | 4위 60.0 | **1위** 1538 | — | $2 / $10 (기념가) | 사람 선호도 1위, 최상위 중 최저가 | Ultra·유료 API부터 제공, 인상 예정 | 어려운 다단계 작업 |
+| Gemini 4 Neon | Google | 중간 | 3위 약 61 (보도) | 집계 전 | — | $3 / $15 (보도) | 높은 점수 대비 빠른 속도 | 출시 직후, 검증 자료 적음 | 일상 업무 전반 |
+| Claude Opus 5.5 | Anthropic | 상위 범용 | 5위 약 59 | 3위 1514 | 100만 | $4 / $20 | 두 순위 모두 상위권, 글쓰기·코딩 균형 | Fable보다 깊은 추론은 약함 | 중요한 보고서, 일반 코딩 |
+| Gemini 4 Argon | Google | 일상 | — | 2위 1529 | — | $2 / $10 (기념가) | 사람 선호도 높음, 가성비 | 최상위 작업엔 Carbon 필요 | Workspace 업무, 대량 작업 |
+| GPT-6.2 Sol | OpenAI | 일상 | 6위 약 57 (보도) | 집계 전 | 약 105만 (보도) | $2 / $10 | 일상 업무용 효율 | 깊은 추론은 Astra 필요 | ChatGPT 일상 업무 |
+| Claude Sonnet 5.5 | Anthropic | 일상 | 8위 약 56 (보도) | — | 100만 | $2 / $10 | 속도·성능 균형, 코딩 | 최상위 대비 낮은 점수 | 일상 코딩·문서 |
+| Muse Wonder | Meta | 상위 | 7위 약 56 (Full) | 6위 1503 | 약 100만 | $4 / $20 (보도) | 음성·영상 입력, 장기 기억 | Full은 구독 전용, 가중치 비공개 | 회의 영상·음성 처리 |
+| Claude Haiku 5.5 | Anthropic | 경량 | — | — | 100만 | $0.10 / $0.50 | 매우 저렴하고 빠름 | 어려운 작업엔 부족 | 대량 분류·요약 |
+| Grok 4.7 | xAI | 상위 | 상위권 밖 | 상위권 밖 | 50만 (보도) | $2 / $6 (보도) | X 실시간 정보, 낮은 출력 단가 | 순위상 한 단계 아래 | 소셜 반응 조사 |
+| 오픈 모델 (Kimi·DeepSeek·GLM·Qwen 등) | 여러 회사 | 다양 | 상위권 밖 | 상위권 밖 | 모델별 상이 | 직접 설치 (서버 비용) | 데이터 통제, 미세조정 | 운영 부담, 성능 한 단계 아래 | 기밀 데이터 업무 |
+
+> '—'는 해당 값을 확인하지 못했다는 뜻입니다. '집계 전'은 출시 직후라 아직 순위표에 반영되지 않은 경우입니다.
 
 ### Anthropic Claude: Fable 5.2 · Opus 5.5 · Sonnet 5.5 · Haiku 5.5
 
@@ -94,14 +151,17 @@
 - **단점**: 출시 초기에는 ChatGPT Work·Codex 등 일부 화면과 유료 요금제(Plus, Pro, Enterprise, Edu)에서 먼저 제공되어, 일반 대화 화면에서는 바로 보이지 않을 수 있습니다. 매우 긴 입력(약 27만 토큰 초과)은 단가가 올라간다는 보도가 있습니다.
 - **이럴 때 쓰세요**: 이미 ChatGPT로 업무를 하는 팀의 기본 도구, 웹사이트·앱 시제품 만들기, 일상 문서 작업(Sol).
 
-### Google Gemini 4: Carbon · Argon
+### Google Gemini 4: Carbon · Neon · Argon · Hydrogen
 
 | 모델 | 위치 | API 요금 (입력/출력) |
 |---|---|---|
 | Gemini 4 Carbon (11월 10일 정식 출시) | Google의 가장 강력한 모델, 어려운 다단계 작업용 | 출시 기념가 $2 / $10 (이후 인상 예정) |
+| Gemini 4 Neon (11월 18일) | Carbon과 Hydrogen 사이 중간 등급, 빠른 작업 완료 | $3 / $15 (보도) |
 | Gemini 4 Argon | 대부분의 코딩·지식 업무용 기본 모델 | $2 / $10 (출시 기념가) |
+| Gemini 4 Hydrogen | 가볍고 빠른 모델 | $1.50 / $7.50 (보도) |
 
 - **장점**: 사람 투표 순위(Arena) 1·2위. 출시 기념가 기준으로 최상위 모델 중 단가가 가장 낮습니다. Gmail·문서·스프레드시트(Workspace)와 검색에 자연스럽게 연결되고, 이미지·영상 같은 멀티모달 이해에 강점이 있습니다.
+- **참고**: Neon은 Google AI Pro·Ultra 구독자의 Gemini 앱과 AI Studio(API)에 먼저 제공되며, 앱에서 Argon을 대신한다는 보도가 있습니다.
 - **단점**: Carbon은 처음에 Google AI Ultra 구독자와 유료 API 사용자부터 제공되어 무료·하위 요금제에서는 쓰기 어렵습니다. 기념가가 끝나면 요금이 오릅니다(보도: 11월 30일 이후 $4 / $20).
 - **이럴 때 쓰세요**: Google Workspace를 쓰는 회사의 문서·메일 업무(10-1), 사진·화면·영상 속 내용 이해, 비용 대비 성능이 중요한 대량 작업(Argon).
 
@@ -197,11 +257,15 @@
 | 공식 | Google, Gemini 4 Carbon is now available | [blog.google](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/) | 2026-11-10 정식 출시, Argon과의 역할 구분, 요금 |
 | 보도 | 9to5Google, Gemini 4 Carbon rolling out | [9to5google.com](https://9to5google.com/2026/11/10/gemini-app-4-carbon/) | 앱 제공 요금제 |
 | 보도 | Gemini 4 Carbon general availability (Resultsense) | [resultsense.com](https://www.resultsense.com/news/2026-11-11-gemini-4-carbon-general-availability/) | 기념가 이후 인상 |
+| 보도 | 9to5Google, Gemini 4 Neon announcement | [9to5google.com](https://9to5google.com/2026/11/18/gemini-4-neon-announcement/) | 2026-11-18 출시, 제공 요금제 |
+| 보도 | Android Authority, Gemini 4 Neon | [androidauthority.com](https://www.androidauthority.com/gemini-4-neon-3736931/) | 제공 범위 |
+| 보도 | Yahoo Tech, Gemini 4 Neon | [tech.yahoo.com](https://tech.yahoo.com/ai/gemini/articles/google-releases-gemini-4-neon-051643298.html) | AA 점수(Neon 61, Opus 5.5 59, GPT-6.2 Sol 57) 인용 |
+| 보도 | Requesty, Smartest AI models: November 2026 | [requesty.ai](https://www.requesty.ai/blog/smartest-ai-model-rankings) | 표 2: Fable 5.2 64.6, Astra 62.1, Neon 61.4 |
 | 보도 | VentureBeat, Meta Muse Wonder / Wonder Full | [venturebeat.com](https://venturebeat.com/technology/metas-new-muse-wonder-and-muse-wonder-full-models-achieve-frontier-performance-but-only-the-weaker-one-is-available-via-api) | 2026-10-12 출시, 제공 범위 |
 | 보도 | Android Authority, Muse Wonder | [androidauthority.com](https://www.androidauthority.com/meta-muse-wonder-ai-models-3722247/) | 입력 형식, 컨텍스트, 요금 |
 | 보도 | Grok Models Explained 2026 (AI Toolbox) | [ai-toolbox.co](https://www.ai-toolbox.co/grok-models/grok-models-explained-2026) | Grok 4.7 출시일·컨텍스트·요금 |
 | 공식 | xAI API | [x.ai/api](https://x.ai/api) | 모델·요금 최신 확인용 |
-| 순위 | Arena 리더보드 (공식) | [arena.ai](https://arena.ai/leaderboard) | 최신 값 확인용 |
+| 순위 | Arena 텍스트 리더보드 (공식) | [arena.ai](https://arena.ai/leaderboard/chat/text?scoring=raw) | 표 1: 2026-11-11 스냅숏, 421개 모델·약 912만 표 |
 | 순위 | Artificial Analysis (공식) | [artificialanalysis.ai](https://artificialanalysis.ai/leaderboards/models) | 최신 값 확인용 |
 | 순위 | Benchleader – LMArena Text (Nov 2026) | [benchleader.com](https://www.benchleader.com/benchmarks/lmarena_text) | 11월 Arena 스냅숏 (집계) |
 | 순위 | Developers Digest – LMArena / AA Index | [developersdigest.tech](https://www.developersdigest.tech/benchmarks/lmarena) | 11월 스냅숏 (집계) |

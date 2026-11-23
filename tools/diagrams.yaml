@@ -146,6 +146,43 @@ diagrams:
       - { icon: "🔄", title: 바꾸기, desc: "더 나은 도구·방법으로\n내 레시피 갱신", color: green }
     note: "새 도구를 모두 쓸 필요는 없습니다 — 내 업무에 효과가 확인된 것만 바꾸세요"
 
+  - file: p09-3-ranking-chart.png
+    kicker: 09-3 · LLM 순위 (2026년 11월)
+    layout: bars
+    columns: 2
+    title: 2026년 11월 *LLM 순위표*
+    subtitle: 시험 점수 순위와 사람 투표 순위는 1위가 다릅니다 — 둘 다 보세요
+    groups:
+      - title: "🧪 시험 점수 순위 TOP 8"
+        subtitle: "Artificial Analysis Intelligence Index · 11월 중순 집계"
+        min: 40
+        max: 66
+        items:
+          - { label: Claude Fable 5.2, sub: Anthropic, value: 64.6, color: orange }
+          - { label: GPT-6.2 Astra, sub: OpenAI, value: 62.1, color: green }
+          - { label: Gemini 4 Neon, sub: Google, value: 61.4, color: blue, tag: 보도 }
+          - { label: Gemini 4 Carbon, sub: Google, value: 60.0, display: "60.0", color: blue }
+          - { label: Claude Opus 5.5, sub: Anthropic, value: 59, color: orange }
+          - { label: GPT-6.2 Sol, sub: OpenAI, value: 57, color: green, tag: 보도 }
+          - { label: Muse Wonder Full, sub: Meta, value: 56, color: purple }
+          - { label: Claude Sonnet 5.5, sub: Anthropic, value: 56, color: orange, tag: 보도 }
+      - title: "🗳️ 사람 투표 순위 TOP 10"
+        subtitle: "Arena 텍스트 리더보드 · 2026-11-11 공식 스냅숏"
+        min: 1470
+        max: 1545
+        items:
+          - { label: Gemini 4 Carbon, sub: Google, value: 1538, color: blue }
+          - { label: Gemini 4 Argon, sub: Google, value: 1529, color: blue }
+          - { label: Claude Opus 5.5, sub: Anthropic, value: 1514, color: orange }
+          - { label: Claude Fable 5.1, sub: Anthropic, value: 1512, color: orange }
+          - { label: Claude Opus 5, sub: Anthropic, value: 1507, color: orange }
+          - { label: Muse Wonder, sub: Meta, value: 1503, color: purple }
+          - { label: Claude Opus 5 (High), sub: Anthropic, value: 1502, color: orange }
+          - { label: Gemini 4 Hydrogen, sub: Google, value: 1502, color: blue }
+          - { label: Claude Opus 4.6, sub: Anthropic, value: 1501, color: orange }
+          - { label: Gemini 3.8 Flash, sub: Google, value: 1500, color: blue }
+    note: "Fable 5.2·GPT-6.2·Gemini 4 Neon은 출시 직후라 11월 11일 Arena 표에 아직 없습니다 · 1~2점 차이는 사실상 같은 수준"
+
   - file: p09-3-model-families.png
     kicker: 09-3 · 주요 LLM 모델 (2026년 11월)
     layout: cards
@@ -155,7 +192,7 @@ diagrams:
     cards:
       - { icon: "🟠", title: Anthropic Claude, desc: "Fable 5.2 · Opus 5.5\nSonnet 5.5 · Haiku 5.5\n코딩·에이전트·긴 문서", color: orange }
       - { icon: "🟢", title: OpenAI GPT, desc: "GPT-6.2 Astra · Sol\nChatGPT·Codex\n어려운 프로젝트·범용", color: green }
-      - { icon: "🔵", title: Google Gemini, desc: "Gemini 4 Carbon · Argon\nWorkspace·검색 연동\n멀티모달·가성비", color: blue }
+      - { icon: "🔵", title: Google Gemini, desc: "Gemini 4 Carbon · Neon · Argon\nWorkspace·검색 연동\n멀티모달·가성비", color: blue }
       - { icon: "🟣", title: Meta Muse, desc: "Muse Wonder · Wonder Full\n텍스트·이미지·음성·영상 입력\n장기 기억", color: purple }
       - { icon: "⚫", title: xAI Grok, desc: "Grok 4.7\nX(트위터) 연동\n낮은 단가", color: teal }
       - { icon: "📦", title: 오픈 모델, desc: "Kimi · DeepSeek · GLM · Qwen\n국산: EXAONE · HyperCLOVA X\n직접 설치·데이터 통제", color: red }

@@ -13,6 +13,7 @@ layout 종류
     spectrum 왼쪽→오른쪽 연속 스펙트럼 (items, left_label, right_label)
     triple   그래프 관계 (rows: [주어, 관계, 목적어])
     stack    아래에서 위로 쌓이는 계층 (layers: 위층이 먼저)
+    bars     순위 막대 그래프 (groups: [{title, min, max, items: [{label, sub, value, color, tag}]}])
 
 필요한 것: Python(pyyaml), Node.js + Playwright, 한글 글꼴(Noto Sans CJK KR), 이모지 글꼴(Noto Color Emoji)
 """
@@ -202,8 +203,46 @@ def stack(d, th):
     return f'<div class="stack">{rows}</div>'
 
 
+BARS_CSS = """
+.bars { display: grid; gap: 22px; }
+.bgrp { background: #fff; border: 1px solid #E2E8F0; border-radius: 22px; padding: 22px 24px 18px;
+  box-shadow: 0 10px 30px -18px rgba(15,23,42,.25); }
+.bgrp h2 { font-size: 21px; font-weight: 800; margin-bottom: 4px; }
+.bgrp .bs { font-size: 13.5px; color: #64748B; margin-bottom: 14px; }
+.brow { display: grid; grid-template-columns: 34px 190px 1fr 104px; align-items: center; gap: 10px; margin: 9px 0; }
+.brk { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; font-weight: 800;
+  font-size: 15px; color: #fff; background: var(--m); }
+.blb { font-size: 15.5px; font-weight: 700; line-height: 1.2; }
+.blb small { display: block; font-size: 12px; font-weight: 500; color: #64748B; }
+.btrack { position: relative; height: 30px; background: #F1F5F9; border-radius: 9px; }
+.bfill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 9px;
+  background: linear-gradient(90deg, var(--l), var(--m)); }
+.bval { display: flex; align-items: center; justify-content: flex-end; gap: 6px;
+  font-size: 15px; font-weight: 800; color: var(--d); }
+.btag { font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 6px; background: #fff; border: 1px solid var(--m); color: var(--d); }
+"""
+
+
+def bars(d, th):
+    out = []
+    for g in d["groups"]:
+        lo, hi = g.get("min", 0), g.get("max", 100)
+        rows = []
+        for i, it in enumerate(g["items"], 1):
+            w = max(4, min(100, (float(it["value"]) - lo) / (hi - lo) * 100))
+            tag = f'<span class="btag">{esc(it["tag"])}</span>' if it.get("tag") else ""
+            rows.append(f'<div class="brow" style="{vars_(it.get("color"))}"><div class="brk">{esc(it.get("rank", i))}</div>'
+                        f'<div class="blb">{esc(it["label"])}<small>{esc(it.get("sub"))}</small></div>'
+                        f'<div class="btrack"><div class="bfill" style="width:{w:.1f}%"></div></div>'
+                        f'<div class="bval">{tag}{esc(it.get("display", it["value"]))}</div></div>')
+        bs = f'<div class="bs">{esc(g["subtitle"])}</div>' if g.get("subtitle") else ""
+        out.append(f'<div class="bgrp"><h2>{esc(g["title"])}</h2>{bs}{"".join(rows)}</div>')
+    cols = d.get("columns", len(d["groups"]))
+    return f'<style>{BARS_CSS}</style><div class="bars" style="grid-template-columns:repeat({cols},1fr)">{"".join(out)}</div>'
+
+
 LAYOUTS = {"flow": flow, "cards": cards, "compare": compare, "matrix": matrix,
-           "spectrum": spectrum, "triple": triple, "stack": stack}
+           "spectrum": spectrum, "triple": triple, "stack": stack, "bars": bars}
 
 
 def title_html(t: str) -> str:
