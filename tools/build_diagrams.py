@@ -425,7 +425,7 @@ def network(d, th):
         links.append(lk)
     layout = "none" if has_xy else d.get("graph_layout", "circular")
     sr = {"type": "graph", "layout": layout, "roam": False, "data": nodes, "links": links,
-          "left": 60, "right": 60, "top": 40, "bottom": 60,
+          "left": 80, "right": 90, "top": 60, "bottom": 105,
           "label": {"show": True, "fontSize": 17, "fontWeight": "bold", "color": "#0F172A"},
           "edgeSymbol": ["none", "arrow"] if d.get("arrows") else ["none", "none"], "edgeSymbolSize": 12,
           "lineStyle": {"color": "#94A3B8", "width": 2.5, "curveness": d.get("curveness", 0.12), "opacity": 0.85}}
