@@ -16,6 +16,7 @@ theme:
   book: AI 300% 활용법
   primary: indigo
   secondary: cyan
+  style: fun
 
 diagrams:
   # ---------- 장 대표 이미지 ----------
