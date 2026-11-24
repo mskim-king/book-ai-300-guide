@@ -396,6 +396,99 @@ diagrams:
       - { icon: "🌏", title: 번역, desc: "DeepL · 파파고\n구글 번역", color: green }
     note: "도구 이름·기능·요금은 자주 바뀝니다 — 최종 확인 날짜를 보고 공식 사이트에서 다시 확인하세요"
 
+  - file: ch10-genre-traits.png
+    kicker: CHAPTER 10 · 장르별 특성
+    layout: cards
+    columns: 3
+    title: 장르마다 *넣는 것*과 *얻는 것*이 다릅니다
+    subtitle: 입력 → 결과물, 그리고 마지막에 사람이 꼭 해야 할 일
+    cards:
+      - { icon: "📄", title: 문서·오피스, desc: "시트·문서·메일 → 정리된 표·초안\n효과: 반복 정리 시간 ↓\n사람: 숫자 대조", color: blue }
+      - { icon: "📊", title: 발표·디자인, desc: "구성안·보고서 → 슬라이드·카드뉴스\n효과: 디자인 시간 ↓\n사람: 메시지·이미지 권리", color: purple }
+      - { icon: "🎬", title: 영상, desc: "장면 대본·원고 → 숏폼·아바타 영상\n효과: 촬영·편집 없이 제작\n사람: 초상권·AI 표시", color: red }
+      - { icon: "🎧", title: 음성·음악, desc: "원고·분위기 설명 → 내레이션·배경음악\n효과: 녹음실 없이 제작\n사람: 상업 이용 약관", color: orange }
+      - { icon: "🗒️", title: 회의·받아쓰기, desc: "녹음 → 회의록·할 일·후속 메일\n효과: 회의록 작성 시간 ↓\n사람: 녹음 동의·이름 확인", color: teal }
+      - { icon: "🌏", title: 번역, desc: "원문 + 용어집 → 맞춤 번역\n효과: 초벌 번역 시간 ↓\n사람: 숫자·계약 검수", color: green }
+    note: "결과물이 밖으로 나갈수록(대외 문서·광고·영상) 사람의 확인 단계를 더 꼼꼼히 두세요"
+
+  - file: p10-1-case.png
+    kicker: 10-1 · 사례로 보기
+    layout: flow
+    title: 월간 실적 보고, *엑셀에서 메일까지*
+    subtitle: 같은 오피스 안에서 AI 기능을 이어 쓰면 파일을 옮길 일이 줄어듭니다
+    steps:
+      - { icon: "📥", title: 원본 시트, desc: "지점 5곳 매출\n표기 제각각", color: slate }
+      - { icon: "🧹", title: 정리 미리 보기, desc: "엑셀 AI로 표기 통일\n변경 목록 확인", color: blue }
+      - { icon: "📈", title: 표·차트, desc: "지점별 추이 차트\n핵심 3줄 요약", color: teal }
+      - { icon: "✉️", title: 보고 메일, desc: "워드 보고서·메일 초안\n숫자 대조 후 발송", color: green }
+    note: "변경 전 '무엇이 어떻게 바뀌는지' 먼저 보여 달라고 하세요"
+
+  - file: p10-2-case.png
+    kicker: 10-2 · 사례로 보기
+    layout: flow
+    title: 신입 교육 발표, *구성 먼저 디자인 나중*
+    subtitle: 메시지는 사람이, 디자인 초안은 AI가 맡습니다
+    steps:
+      - { icon: "📚", title: 원자료, desc: "사내 규정·안내 문서\n20쪽", color: slate }
+      - { icon: "🧭", title: 구성안, desc: "대화형 AI로\n8장 결론형 제목", color: indigo }
+      - { icon: "🎨", title: 슬라이드 초안, desc: "Gamma·Canva 등\n디자인 입히기", color: purple }
+      - { icon: "✅", title: 다듬기, desc: "회사 양식·숫자 확인\n발표자 메모", color: green }
+    note: "'발표 자료 만들어 줘' 한 줄보다 '구성안 → 디자인' 두 단계가 결과가 훨씬 좋습니다"
+
+  - file: p10-3-case.png
+    kicker: 10-3 · 사례로 보기
+    layout: flow
+    title: 앱 사용법 안내 영상, *촬영 없이 3분*
+    subtitle: 원고만 고치면 다시 만들 수 있어 자주 바뀌는 안내에 특히 좋습니다
+    steps:
+      - { icon: "📝", title: 원고, desc: "기능 3가지\n장면별 대본", color: indigo }
+      - { icon: "🧑‍💼", title: 아바타 발표, desc: "인사·요약 장면\n아바타 영상 도구", color: red }
+      - { icon: "🖥️", title: 화면 녹화, desc: "실제 앱 조작 화면\n직접 녹화", color: blue }
+      - { icon: "🎞️", title: 편집, desc: "자막·로고·음악\nAI 생성 표시", color: green }
+    note: "가짜 화면 대신 실제 화면 녹화를 섞으면 신뢰도가 높아집니다"
+
+  - file: p10-4-case.png
+    kicker: 10-4 · 사례로 보기
+    layout: flow
+    title: 사내 소식지를 *5분 오디오 브리핑*으로
+    subtitle: 읽는 글과 듣는 글은 다릅니다 — 원고를 먼저 '귀용'으로 바꿉니다
+    steps:
+      - { icon: "📰", title: 소식지, desc: "A4 3쪽\n글 5꼭지", color: slate }
+      - { icon: "✂️", title: 듣기용 원고, desc: "짧은 문장\n숫자 읽기 표기", color: indigo }
+      - { icon: "🎙️", title: 음성 생성, desc: "진행자 목소리\n발음 확인", color: orange }
+      - { icon: "🎵", title: 배경음·배포, desc: "인트로 음악\n사내 채널 공유", color: green }
+    note: "고유명사·숫자는 원고에 '읽는 대로' 적어 두면 발음 오류가 줄어듭니다"
+
+  - file: p10-5-case.png
+    kicker: 10-5 · 사례로 보기
+    layout: flow
+    title: 킥오프 회의 하나로 *세 가지 문서*
+    subtitle: 같은 받아쓰기 결과에서 회의록·업무 분장표·후속 메일을 뽑습니다
+    steps:
+      - { icon: "🎤", title: 녹음, desc: "참석자 동의\n60분 회의", color: slate }
+      - { icon: "🗒️", title: 받아쓰기, desc: "한국어 강한 도구\n화자 구분", color: teal }
+      - { icon: "📋", title: 정리, desc: "회의록 · 업무 분장표\n일정표", color: blue }
+      - { icon: "📨", title: 공유, desc: "이름·숫자 확인 후\n후속 메일 발송", color: green }
+    note: "참석자 명단과 용어집을 함께 주면 이름·제품명 오류가 크게 줄어듭니다"
+
+  - file: p10-6-case.png
+    kicker: 10-6 · 사례로 보기
+    layout: compare
+    title: 같은 문장, *번역 방법*에 따라 이렇게 다릅니다
+    left:
+      title: 번역기에 그대로
+      items:
+        - "회사 용어가 문서마다 다르게 번역됨"
+        - "상대 문화에 맞지 않는 말투"
+        - "'검토 후 회신' 같은 표현이 어색하게 직역"
+    right:
+      title: 용어집 + 대상·말투 지정
+      items:
+        - "제품명·단위가 항상 같은 번역"
+        - "받는 사람에 맞는 정중함 수준"
+        - "역번역으로 뜻이 바뀌지 않았는지 확인"
+    note: "번역 도구와 대화형 AI 프롬프트에 같은 용어집을 쓰세요"
+
   - file: p10-7-job-cases.png
     kicker: 10-7 · 직무별 도구 조합
     layout: stack
