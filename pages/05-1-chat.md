@@ -4,17 +4,22 @@
 **태그**: #도구
 **작성일**: 2026-11-21
 -->
-> 📅 **최종 확인**: 2026-11-21
+> 📅 **최종 확인**: 2026-11-24
 
 대화형 AI는 가장 기본이 되는 AI 도구입니다. 질문하고, 글을 쓰게 하고, 파일을 올려 분석시키는 등 **대부분의 업무를 여기서 시작**합니다.
 
 [TOC]
+
+![노트북으로 일하는 모습](../assets/photo-05-1-laptop.jpg)
+<small>사진: [Top Laptop](https://stocksnap.io/photo/top-laptop-DWQKYDVEKD) · Burst · [CC0 1.0 (퍼블릭 도메인)](https://creativecommons.org/publicdomain/zero/1.0/) · Openverse 경유</small>
 
 ## 요약
 
 - 대표 도구는 **ChatGPT, Claude, Gemini**입니다. 기본 기능은 비슷하고 강점이 조금씩 다릅니다.
 - 같은 일을 반복한다면 **프로젝트(작업 공간)** 기능에 자료와 지시를 저장해 두면 매번 설명할 필요가 없습니다.
 - 긴 글을 고칠 때는 **옆 화면 편집 기능**(Canvas, Artifacts)을 쓰면 편합니다.
+
+![대화형 AI를 제대로 쓰는 세 가지 기능](../assets/p05-1-chat.png)
 
 ## 언제 쓰나
 
@@ -106,6 +111,7 @@
 | 기능 이름 비교 | [ChatGPT vs Claude vs Gemini: Feature & Terminology Map (2026)](https://bootstrapcreative.com/chatgpt-vs-claude-vs-gemini-terminology/) | 기능 이름 대응표 |
 | 작업 공간 비교 | [Gemini Notebooks vs Claude Projects vs ChatGPT Memory](https://www.mindstudio.ai/blog/gemini-notebooks-vs-claude-projects-vs-chatgpt-memory) | 프로젝트·메모리 |
 | 종합 비교 | [ChatGPT vs Claude vs Gemini (2026)](https://dataaspirant.com/blog/chatgpt-vs-claude-vs-gemini/) | 강점 비교 |
+| 사진 | [Top Laptop](https://stocksnap.io/photo/top-laptop-DWQKYDVEKD) (Burst) | CC0 1.0 (퍼블릭 도메인) |
 
 ## 실무 체크포인트
 

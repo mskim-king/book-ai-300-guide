@@ -8,6 +8,9 @@
 
 영상 AI는 글이나 이미지로 **짧은 영상을 만들거나**, 사람 대신 말하는 **아바타 영상**을 만들어 줍니다. 제품 소개, 교육 영상, SNS 숏폼처럼 촬영과 편집에 시간이 많이 드는 일을 크게 줄일 수 있습니다.
 
+![노트북에서 영상 편집하는 모습](../assets/photo-10-3-video-edit.jpg)
+<small>사진: [Work in Progress](https://www.flickr.com/photos/44124370018@N01/5530230863) · daveynin · [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) · Openverse 경유</small>
+
 ## 요약
 
 - **장면 생성형**(Veo, Kling, Runway, Luma 등): 글·이미지로 영상 장면을 만듭니다.
@@ -154,6 +157,7 @@
 | 비교 | [The Best AI Video Generators in 2026 (Dupple)](https://dupple.com/learn/best-ai-video-generators) | Veo·Kling·Runway |
 | 비교 | [Best AI Video Generators in 2026, Compared (Kreatorflow)](https://kreatorflow.ai/guides/best-ai-video-generators-2026) | 비교 |
 | 참고 | [The 10 Best AI Video Generators in 2026 (Synthesia 작성)](https://www.synthesia.io/post/best-ai-video-generators) | 판매사 작성 자료 |
+| 사진 | [Work in Progress](https://www.flickr.com/photos/44124370018@N01/5530230863) (daveynin) | CC BY 2.0 |
 
 ## 관련 페이지
 

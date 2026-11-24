@@ -8,6 +8,9 @@
 
 음성 AI는 글을 자연스러운 목소리로 읽어 주고(TTS), 음악 AI는 원하는 분위기의 배경 음악이나 노래를 만들어 줍니다. 영상 내레이션, 오디오 안내, 팟캐스트, 매장 배경 음악처럼 **소리가 필요한 콘텐츠**를 빠르게 만들 수 있습니다.
 
+![마이크와 녹음 프로그램이 있는 팟캐스트 작업 공간](../assets/photo-10-4-podcast.jpg)
+<small>사진: [The Podcave](https://www.flickr.com/photos/70816538@N00/76894378) · TimWilson · [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) · Openverse 경유</small>
+
 ## 요약
 
 - **음성 생성(TTS)**: 원고를 넣으면 사람 같은 목소리로 읽어 줍니다. (예: ElevenLabs)
@@ -146,6 +149,7 @@
 | 비교 | [AI Music Generation 2026: Suno, Udio, ElevenLabs Compared (Digital Applied)](https://www.digitalapplied.com/blog/ai-music-generation-platforms-suno-udio-elevenlabs-2026) | 권리 조건 |
 | 비교 | [Best AI Music Generators in 2026: Ranked by What You Can Legally Use](https://www.web3aiblog.com/blog/best-ai-music-generators-2026) | 상업 이용 |
 | 비교 | [Best AI Music Generators (Sept 2026): Price + Rights (Teamday)](https://www.teamday.ai/blog/best-ai-music-models-2026) | 최신 모델·권리 |
+| 사진 | [The Podcave](https://www.flickr.com/photos/70816538@N00/76894378) (TimWilson) | CC BY 2.0 |
 
 ## 관련 페이지
 
