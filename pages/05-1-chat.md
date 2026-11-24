@@ -10,6 +10,9 @@
 
 [TOC]
 
+![노트북으로 일하는 모습](../assets/photo-05-1-laptop.jpg)
+<small>사진: [Top Laptop](https://stocksnap.io/photo/top-laptop-DWQKYDVEKD) · Burst · [CC0 1.0 (퍼블릭 도메인)](https://creativecommons.org/publicdomain/zero/1.0/) · Openverse 경유</small>
+
 ## 요약
 
 - 대표 도구는 **ChatGPT, Claude, Gemini**입니다. 기본 기능은 비슷하고 강점이 조금씩 다릅니다.
@@ -108,6 +111,7 @@
 | 기능 이름 비교 | [ChatGPT vs Claude vs Gemini: Feature & Terminology Map (2026)](https://bootstrapcreative.com/chatgpt-vs-claude-vs-gemini-terminology/) | 기능 이름 대응표 |
 | 작업 공간 비교 | [Gemini Notebooks vs Claude Projects vs ChatGPT Memory](https://www.mindstudio.ai/blog/gemini-notebooks-vs-claude-projects-vs-chatgpt-memory) | 프로젝트·메모리 |
 | 종합 비교 | [ChatGPT vs Claude vs Gemini (2026)](https://dataaspirant.com/blog/chatgpt-vs-claude-vs-gemini/) | 강점 비교 |
+| 사진 | [Top Laptop](https://stocksnap.io/photo/top-laptop-DWQKYDVEKD) (Burst) | CC0 1.0 (퍼블릭 도메인) |
 
 ## 실무 체크포인트
 

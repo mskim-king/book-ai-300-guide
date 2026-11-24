@@ -8,6 +8,9 @@
 
 발표 자료를 만들 때 가장 오래 걸리는 일은 **구성 잡기와 디자인**입니다. 프레젠테이션·디자인 AI는 주제나 문서를 주면 슬라이드 초안을 디자인까지 입혀 만들어 줍니다.
 
+![컨퍼런스 발표 장면](../assets/photo-10-2-presentation.jpg)
+<small>사진: [Monday Sessions, David Cage of Quantic Dream](https://www.flickr.com/photos/46982319@N06/4897801058) · Official GDC · [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) · Openverse 경유</small>
+
 ## 요약
 
 - **Gamma**: 프롬프트나 문서로 슬라이드를 빠르게 만드는 AI 전용 도구로 자주 꼽힙니다.
@@ -176,6 +179,7 @@
 | 비교 | [Best presentation software 2026 (Guideflow)](https://www.guideflow.com/blog/presentation-software-ai-tools) | 15개 도구 |
 | 비교 | [Best AI for Presentations 2026 (The AI Rankings)](https://theairankings.com/best-ai-for-presentations/) | Gamma·Copilot |
 | 참고 | [The Best AI Presentation Makers in 2026 (Gamma 작성)](https://gamma.app/explore/content/guides/best-ai-presentation-makers) | 판매사 작성 자료 |
+| 사진 | [Monday Sessions, David Cage of Quantic Dream](https://www.flickr.com/photos/46982319@N06/4897801058) (Official GDC) | CC BY 2.0 |
 
 ## 관련 페이지
 

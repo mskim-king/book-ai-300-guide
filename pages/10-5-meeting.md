@@ -8,6 +8,9 @@
 
 회의·받아쓰기 AI는 회의를 녹음해 **글로 받아 적고, 요약하고, 할 일까지 뽑아 줍니다.** 회의록 작성에 쓰던 시간을 크게 줄일 수 있는 가장 체감이 큰 도구 중 하나입니다.
 
+![회의 중 메모하는 모습](../assets/photo-10-5-meeting.jpg)
+<small>사진: [Team Meeting](https://stocksnap.io/photo/team-meeting-2R1OMUFVO5) · Startup Stock Photos · [CC0 1.0 (퍼블릭 도메인)](https://creativecommons.org/publicdomain/zero/1.0/) · Openverse 경유</small>
+
 ## 요약
 
 - **한국어 회의**가 중심이라면 한국어 인식에 강한 국내 도구(클로바노트, 다글로, 티로 등)가 자주 추천됩니다.
@@ -169,6 +172,7 @@
 | 비교 | [AI 회의록 4종 비교 — 한국어로 갈린다 (2026)](https://junai.ai/blog/ai-meeting-notes-tools-comparison-2026/) | 한국어 정확도 |
 | 비교 | [2026 AI 회의록 도구 추천 9선 (genape)](https://genape.ai/ko/tutorial-article/ai-generator/ai-meeting) | 기능·가격 |
 | 참고 | [AI 노트 테이커 국내외 비교 (다글로 작성)](https://daglo.ai/d/ko/blog/ai-note-taker-hoeuirok-dogu-bigyo-daglo) | 판매사 작성 자료 |
+| 사진 | [Team Meeting](https://stocksnap.io/photo/team-meeting-2R1OMUFVO5) (Startup Stock Photos) | CC0 1.0 (퍼블릭 도메인) |
 
 ## 관련 페이지
 
