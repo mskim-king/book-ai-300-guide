@@ -1939,3 +1939,86 @@ diagrams:
       - 수업 자료
       - 1
     note: 모든 직무가 대화형 AI를 거칩니다 — 직무마다 '앞뒤에 붙는 도구'가 다를 뿐입니다 (흐름 굵기는 설명용)
+
+  # ---------- 재미 그림 (만화 · 채팅) ----------
+  - file: p02-2-comic-prompt.png
+    kicker: 02-2 · 구체적으로 요청하는 법
+    layout: comic
+    columns: 2
+    title: '"잘 써 줘"의 *배신* — 프롬프트 4컷'
+    subtitle: 막연한 요청과 구체적인 요청은 결과가 이렇게 다릅니다 (가상의 이야기)
+    panels:
+    - color: indigo
+      scene: 🧑‍💼 📝 💻
+      bubbles:
+      - who: 🧑‍💼
+        side: left
+        text: 김 대리, 신제품 출시 안내 메일 좀 써 줘요. 내일 고객사에 보낼 거예요.
+      - who: 🙋
+        side: right
+        text: 네! AI한테 시키면 금방이죠.
+      caption: 월요일 오후, 급한 부탁
+    - color: red
+      sfx: 엥?
+      scene: 🤖 📄 😵
+      bubbles:
+      - who: 🙋
+        side: left
+        text: '"신제품 출시 안내 메일 좋게 써 줘"'
+      - who: 🤖
+        side: right
+        text: 친애하는 고객님! 혁신적이고 놀라운 신제품이 드디어…!!
+      caption: 막연하게 물으면 무난하고 과장된 답
+    - color: teal
+      scene: ✍️ 🎯 📋
+      bubbles:
+      - who: 🙋
+        side: left
+        text: '대상: 2년 거래한 B2B 고객 / 목적: 출시일·주문 방법 안내 / 5문장 이내, 정중하게'
+      - who: 🤖
+        side: right
+        text: 알겠습니다. 출시일과 주문 방법을 첫 문단에 넣을게요.
+      caption: 누가·무엇을·얼마나·어떤 말투로
+    - color: emerald
+      sfx: 완벽!
+      scene: 🧑‍💼 👍 📨
+      bubbles:
+      - who: 🧑‍💼
+        side: left
+        text: 오, 고칠 데가 거의 없네요? 바로 보냅시다.
+      - who: 🙋
+        side: right
+        text: 조건을 구체적으로 줬더니 한 번에 나왔어요!
+      caption: 구체적인 조건 = 한 번에 끝나는 결과
+    note: 모호한 형용사("좋게", "간단히") 대신 대상·분량·형식·말투·꼭 넣을 것을 적으세요
+  - file: p01-3-chat-hallucination.png
+    kicker: 01-3 · 환각과 검증하는 습관
+    layout: chat
+    title: AI가 *없는 논문*을 알려 줬어요
+    subtitle: 환각을 만났을 때 대처법 (가상의 대화)
+    chat_title: 💬 기획팀 단톡방
+    messages:
+    - name: 신입 하늘
+      avatar: 🐣
+      text: AI가 보고서에 넣을 논문을 3개나 찾아 줬어요! 제목·저자·연도까지 완벽해요 ✨
+    - name: 선배 도윤
+      avatar: 🦊
+      text: 좋네. 그 논문 링크 열어 봤어?
+      side: right
+    - name: 신입 하늘
+      avatar: 🐣
+      text: …검색해 보니 그런 논문이 *없어요* 😱 저자 이름은 진짜 있는 사람인데…
+    - name: 선배 도윤
+      avatar: 🦊
+      text: 그게 *환각*이야. AI는 그럴듯한 다음 말을 이어 붙이는 거라, 없는 것도 진짜처럼 만들어.
+      side: right
+    - name: 신입 하늘
+      avatar: 🐣
+      text: 그럼 AI 결과는 못 믿는 건가요?
+    - name: 선배 도윤
+      avatar: 🦊
+      text: '아니, 쓰되 *검증 3단계*를 거치면 돼.
+
+        ① 숫자·이름·출처에 표시 ② 원문과 하나씩 대조 ③ 확인 못 하면 빼기'
+      side: right
+    note: 자신 있는 말투가 정확하다는 뜻은 아닙니다 — 출처는 직접 열어 확인하세요
