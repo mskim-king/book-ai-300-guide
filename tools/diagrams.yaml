@@ -16,6 +16,7 @@ theme:
   book: AI 300% 활용법
   primary: indigo
   secondary: cyan
+  style: fun
 
 diagrams:
   # ---------- 장 대표 이미지 ----------
@@ -1281,3 +1282,743 @@ diagrams:
 
         파일 저장'
     note: 모르는 용어가 나오면 AI에게 "중학생에게 설명하듯" 물어보세요
+
+  # ---------- 데이터 시각화 (chart · network · sankey · timeline) ----------
+  - file: p01-1-token-prob.png
+    kicker: 01-1 · LLM은 어떻게 답을 만드는가
+    layout: chart
+    kind: hbar
+    height: 380
+    title: AI는 *확률이 가장 높은 말*을 고릅니다
+    subtitle: 입력 "이번 ___ 매출은…" 다음에 올 말 후보와 확률 (설명용 가상 수치)
+    categories:
+    - 분기
+    - 년
+    - 달
+    - 주
+    - 해
+    unit: '%'
+    max: 70
+    highlight: 0
+    series:
+    - name: 확률
+      data:
+      - 62
+      - 18
+      - 11
+      - 6
+      - 3
+      color: indigo
+      mark:
+        at: 0
+        value: 62
+        text: 선택
+        color: orange
+    note: 가장 그럴듯한 말을 고를 뿐이라 '그럴듯하지만 틀린 답(환각)'이 생길 수 있습니다 → 01-3
+  - file: p01-2-delegate-scatter.png
+    kicker: 01-2 · AI가 잘하는 일과 못하는 일
+    layout: chart
+    kind: scatter
+    height: 520
+    title: 내 업무를 *판단표 위에* 찍어 보기
+    subtitle: '가로: 틀렸을 때 피해 · 세로: 내가 검토하기 어려운 정도 (업무 위치는 설명용 예시)'
+    x_label: 틀렸을 때 피해 →
+    y_label: 검토하기 어려움 →
+    x_range:
+    - 0
+    - 10
+    y_range:
+    - 0
+    - 10
+    quadrants:
+    - 참고용으로만
+    - 전문가 확인 필수
+    - 적극 활용
+    - 활용 + 꼼꼼히 확인
+    quadrant_colors:
+    - '#FFF7ED'
+    - '#FEF2F2'
+    - '#ECFDF5'
+    - '#FFF7ED'
+    points:
+    - name: 회의 아이디어
+      x: 1.5
+      y: 1.5
+      color: green
+    - name: 메일 초안
+      x: 3
+      y: 2.2
+      color: green
+    - name: 회의록 요약
+      x: 3.6
+      y: 3.4
+      color: green
+    - name: 고객 안내문
+      x: 7
+      y: 2.5
+      color: orange
+    - name: 임원 보고서
+      x: 8
+      y: 3.8
+      color: orange
+    - name: 낯선 분야 공부
+      x: 2.5
+      y: 7.5
+      color: orange
+    - name: 번역(모르는 언어)
+      x: 4.2
+      y: 8.6
+      color: orange
+    - name: 계약서 조항
+      x: 8.3
+      y: 8.3
+      color: red
+    - name: 세무 판단
+      x: 7.2
+      y: 7
+      color: red
+    note: 오른쪽 위로 갈수록 AI 결과를 그대로 쓰면 위험합니다 — 내 업무 5개를 직접 찍어 보세요
+  - file: p05-7-tool-network.png
+    kicker: 05-7 · 목적별 도구 고르기
+    layout: network
+    height: 520
+    title: 업무와 AI 도구의 *관계도*
+    subtitle: 원은 도구 유형, 네모는 업무 — 선이 많을수록 여러 업무에 쓰입니다
+    groups:
+      도구 유형: indigo
+      업무: slate
+    nodes:
+    - name: 대화형 AI
+      group: 도구 유형
+      x: 500
+      y: 260
+      size: 92
+    - name: 검색·리서치 AI
+      group: 도구 유형
+      x: 200
+      y: 110
+      size: 58
+    - name: 문서·노트 AI
+      group: 도구 유형
+      x: 200
+      y: 410
+      size: 58
+    - name: 코딩 AI
+      group: 도구 유형
+      x: 800
+      y: 410
+      size: 58
+    - name: 이미지·음성 AI
+      group: 도구 유형
+      x: 800
+      y: 110
+      size: 58
+    - name: 업무 자동화
+      group: 도구 유형
+      x: 980
+      y: 260
+      size: 58
+    - name: 시장 조사
+      group: 업무
+      x: 40
+      y: 260
+      size: 40
+      shape: roundRect
+    - name: 보고서 작성
+      group: 업무
+      x: 350
+      y: 40
+      size: 40
+      shape: roundRect
+    - name: 홍보물 제작
+      group: 업무
+      x: 650
+      y: 40
+      size: 40
+      shape: roundRect
+    - name: 회의 정리
+      group: 업무
+      x: 980
+      y: 60
+      size: 40
+      shape: roundRect
+    - name: 데이터 분석
+      group: 업무
+      x: 650
+      y: 480
+      size: 40
+      shape: roundRect
+    - name: 반복 업무
+      group: 업무
+      x: 980
+      y: 460
+      size: 40
+      shape: roundRect
+    - name: 자료 공부
+      group: 업무
+      x: 350
+      y: 480
+      size: 40
+      shape: roundRect
+    links:
+    - - 시장 조사
+      - 검색·리서치 AI
+    - - 시장 조사
+      - 문서·노트 AI
+    - - 보고서 작성
+      - 검색·리서치 AI
+    - - 보고서 작성
+      - 대화형 AI
+    - - 홍보물 제작
+      - 대화형 AI
+    - - 홍보물 제작
+      - 이미지·음성 AI
+    - - 회의 정리
+      - 이미지·음성 AI
+    - - 회의 정리
+      - 대화형 AI
+    - - 회의 정리
+      - 업무 자동화
+    - - 데이터 분석
+      - 코딩 AI
+    - - 데이터 분석
+      - 대화형 AI
+    - - 반복 업무
+      - 업무 자동화
+    - - 반복 업무
+      - 코딩 AI
+    - - 자료 공부
+      - 문서·노트 AI
+    - - 자료 공부
+      - 대화형 AI
+    note: 대화형 AI가 거의 모든 업무의 중심 — 다른 도구는 자료 준비와 마무리를 맡습니다
+  - file: p06-1-sankey.png
+    kicker: 06-1 · 리서치 → 정리 → 발행
+    layout: sankey
+    height: 470
+    title: 자료가 *결과물*이 되기까지
+    subtitle: 왼쪽 자료가 어떤 AI를 거쳐 오른쪽 결과물이 되는지 흐름의 굵기로 보여 줍니다
+    nodes:
+    - name: 업무 메모
+      color: slate
+    - name: 회의 녹음
+      color: slate
+    - name: PDF 보고서
+      color: slate
+    - name: 엑셀 데이터
+      color: slate
+    - name: 받아쓰기 AI
+      color: orange
+    - name: 문서·노트 AI
+      color: teal
+    - name: 코딩 AI
+      color: purple
+    - name: 대화형 AI
+      color: indigo
+    - name: 보고서 초안
+      color: green
+    - name: 회의록·할 일
+      color: green
+    - name: 요약·비교표
+      color: green
+    - name: 차트·분석
+      color: green
+    links:
+    - - 업무 메모
+      - 대화형 AI
+      - 5
+    - - 회의 녹음
+      - 받아쓰기 AI
+      - 5
+    - - 받아쓰기 AI
+      - 대화형 AI
+      - 4
+    - - 받아쓰기 AI
+      - 회의록·할 일
+      - 1
+    - - PDF 보고서
+      - 문서·노트 AI
+      - 4
+    - - 문서·노트 AI
+      - 대화형 AI
+      - 2
+    - - 문서·노트 AI
+      - 요약·비교표
+      - 2
+    - - 엑셀 데이터
+      - 코딩 AI
+      - 3
+    - - 엑셀 데이터
+      - 대화형 AI
+      - 2
+    - - 대화형 AI
+      - 보고서 초안
+      - 6
+    - - 대화형 AI
+      - 회의록·할 일
+      - 4
+    - - 대화형 AI
+      - 요약·비교표
+      - 1
+    - - 대화형 AI
+      - 차트·분석
+      - 2
+    - - 코딩 AI
+      - 차트·분석
+      - 3
+    note: 굵은 흐름 = 자주 쓰는 경로 (굵기는 이해를 돕기 위한 설명용 값)
+  - file: p07-2-mcp-network.png
+    kicker: 07-2 · MCP
+    layout: network
+    height: 480
+    arrows: true
+    title: MCP 연결 *구조도*
+    subtitle: AI 앱(클라이언트)이 MCP 서버를 통해 여러 도구와 같은 방식으로 연결됩니다
+    groups:
+      AI 앱: indigo
+      MCP 서버: teal
+      실제 도구·데이터: slate
+    nodes:
+    - name: 'AI 앱
+
+        (Claude 등)'
+      group: AI 앱
+      x: 120
+      y: 240
+      size: 100
+    - name: 드라이브 서버
+      group: MCP 서버
+      x: 480
+      y: 60
+      size: 54
+    - name: 노션 서버
+      group: MCP 서버
+      x: 480
+      y: 180
+      size: 54
+    - name: 깃허브 서버
+      group: MCP 서버
+      x: 480
+      y: 300
+      size: 54
+    - name: DB 서버
+      group: MCP 서버
+      x: 480
+      y: 420
+      size: 54
+    - name: Google Drive
+      group: 실제 도구·데이터
+      x: 860
+      y: 60
+      size: 40
+      shape: roundRect
+    - name: Notion
+      group: 실제 도구·데이터
+      x: 860
+      y: 180
+      size: 40
+      shape: roundRect
+    - name: GitHub
+      group: 실제 도구·데이터
+      x: 860
+      y: 300
+      size: 40
+      shape: roundRect
+    - name: 회사 DB
+      group: 실제 도구·데이터
+      x: 860
+      y: 420
+      size: 40
+      shape: roundRect
+    links:
+    - - 'AI 앱
+
+        (Claude 등)'
+      - 드라이브 서버
+      - MCP
+    - - 'AI 앱
+
+        (Claude 등)'
+      - 노션 서버
+      - MCP
+    - - 'AI 앱
+
+        (Claude 등)'
+      - 깃허브 서버
+      - MCP
+    - - 'AI 앱
+
+        (Claude 등)'
+      - DB 서버
+      - MCP
+    - - 드라이브 서버
+      - Google Drive
+      - API
+    - - 노션 서버
+      - Notion
+      - API
+    - - 깃허브 서버
+      - GitHub
+      - API
+    - - DB 서버
+      - 회사 DB
+      - SQL
+    curveness: 0.0
+    note: AI 앱은 'MCP'라는 한 가지 말만 알면 되고, 도구마다 다른 연결은 서버가 맡습니다
+  - file: p09-3-price-score.png
+    kicker: 09-3 · LLM 순위
+    layout: chart
+    kind: scatter
+    height: 520
+    show_ticks: true
+    title: 성능과 *가격*을 함께 보면
+    subtitle: '가로: API 출력 요금($/100만 토큰) · 세로: Artificial Analysis 시험 점수 (2026년 11월)'
+    x_label: 출력 요금 ($/100만 토큰) →
+    y_label: 시험 점수 →
+    x_range:
+    - 0
+    - 45
+    y_range:
+    - 54
+    - 66
+    x_mid: 25
+    y_mid: 59.5
+    quadrants:
+    - 가성비 상위권
+    - 최상위 (비쌈)
+    - 실속형
+    - ''
+    quadrant_colors:
+    - '#ECFDF5'
+    - '#EEF2FF'
+    - '#F8FAFC'
+    - '#FFFFFF'
+    points:
+    - name: Claude Fable 5.2
+      label: left
+      x: 40
+      y: 64.6
+      color: orange
+      size: 30
+    - name: GPT-6.2 Astra
+      label: left
+      x: 40
+      y: 62.1
+      color: green
+      size: 30
+    - name: Gemini 4 Neon*
+      x: 15
+      y: 61.4
+      color: blue
+    - name: Gemini 4 Carbon
+      x: 10
+      y: 60.0
+      color: blue
+    - name: Claude Opus 5.5
+      x: 20
+      y: 59
+      color: orange
+    - name: GPT-6.2 Sol*
+      x: 10
+      y: 57
+      color: green
+    - name: Claude Sonnet 5.5*
+      x: 10
+      y: 56
+      color: orange
+    source: '출처: 각 사 공식 요금(Gemini는 출시 기념가), 점수는 집계 사이트 11월 중순 값 · *표시는 보도 기준 (09-3 근거·출처 표)'
+    note: 왼쪽 위(점수 높고 저렴)가 가성비 구간 — 요금은 바뀌므로 최종 확인 날짜를 보세요
+  - file: p09-3-context-bar.png
+    kicker: 09-3 · LLM 순위
+    layout: chart
+    kind: hbar
+    height: 330
+    title: 한 번에 넣을 수 있는 글의 양 (*컨텍스트 창*)
+    subtitle: '단위: 천 토큰 · 100만 토큰 ≈ 책 여러 권 분량'
+    categories:
+    - GPT-6.2 (보도)
+    - Claude 5.x 계열
+    - Muse Wonder (보도)
+    - Grok 4.7 (보도)
+    unit: K
+    series:
+    - name: 컨텍스트 창
+      data:
+      - 1050
+      - 1000
+      - 1000
+      - 500
+      color: teal
+    source: '출처: Anthropic 모델 문서, OpenAI·Meta·xAI 관련 보도 (09-3 근거·출처 표) · Gemini 4는 공식 수치 미확인으로 제외'
+    note: 주요 모델 대부분이 100만 토큰급 — 긴 문서도 잘라 넣지 않아도 됩니다 (03-3)
+  - file: p09-3-timeline.png
+    kicker: 09-3 · LLM 순위
+    layout: timeline
+    title: 2026년 가을, *새 모델 출시* 흐름
+    subtitle: 한 달 사이 주요 회사가 모두 새 모델을 내놓았습니다
+    events:
+    - date: 9/21
+      title: Grok 4.7
+      desc: xAI
+      color: slate
+    - date: 10/12
+      title: Muse Wonder
+      desc: Meta 첫 최상위급
+      color: purple
+    - date: 11/9
+      title: Claude Fable 5.2
+      desc: Anthropic
+      color: orange
+    - date: 11/10
+      title: Gemini 4 Carbon
+      desc: Google 정식 출시
+      color: blue
+    - date: 11/17
+      title: GPT-6.2
+      desc: OpenAI Astra·Sol
+      color: green
+    - date: 11/18
+      title: Gemini 4 Neon
+      desc: Google 중간 등급
+      color: blue
+    note: 이렇게 자주 바뀌므로 매달 09-1 루틴으로 확인하세요
+  - file: p10-genre-radar.png
+    kicker: CHAPTER 10 · 장르별 특성
+    layout: chart
+    kind: radar
+    height: 480
+    max: 5
+    title: 장르별 AI 도구 *특성 비교*
+    subtitle: 5점에 가까울수록 유리 (이 책의 설명용 평가)
+    indicators:
+    - 시작 쉬움
+    - 시간 절약
+    - 권리 위험 낮음
+    - 검수 부담 낮음
+    - 결과 일관성
+    series:
+    - name: 회의·받아쓰기
+      data:
+      - 5
+      - 5
+      - 4
+      - 3
+      - 4
+      color: teal
+    - name: 문서·오피스
+      data:
+      - 5
+      - 4
+      - 5
+      - 3
+      - 4
+      color: blue
+    - name: 영상
+      data:
+      - 2
+      - 4
+      - 2
+      - 2
+      - 2
+      color: red
+    note: 넓은 면적일수록 바로 효과를 보기 쉬운 장르 — 영상은 권리·검수 부담을 먼저 확인하세요
+  - file: p10-7-sankey.png
+    kicker: 10-7 · 직무별 도구 조합
+    layout: sankey
+    height: 480
+    title: 직무별로 *어떤 도구*를 거치나
+    subtitle: 직무(왼쪽)에서 쓰는 도구 유형(가운데)을 거쳐 결과물(오른쪽)로
+    nodes:
+    - name: 마케터
+      color: pink
+    - name: 교사·강사
+      color: indigo
+    - name: 영업·기획
+      color: blue
+    - name: 1인 창업자
+      color: amber
+    - name: 연구자
+      color: teal
+    - name: 검색·리서치
+      color: cyan
+    - name: 대화형 AI
+      color: violet
+    - name: 문서·노트
+      color: teal
+    - name: 이미지·영상·음성
+      color: orange
+    - name: 회의·번역
+      color: green
+    - name: 캠페인 소재
+      color: slate
+    - name: 수업 자료
+      color: slate
+    - name: 제안서
+      color: slate
+    - name: 상세페이지
+      color: slate
+    - name: 논문 초안
+      color: slate
+    links:
+    - - 마케터
+      - 검색·리서치
+      - 2
+    - - 마케터
+      - 대화형 AI
+      - 3
+    - - 마케터
+      - 이미지·영상·음성
+      - 3
+    - - 교사·강사
+      - 문서·노트
+      - 3
+    - - 교사·강사
+      - 대화형 AI
+      - 2
+    - - 교사·강사
+      - 회의·번역
+      - 1
+    - - 영업·기획
+      - 회의·번역
+      - 3
+    - - 영업·기획
+      - 대화형 AI
+      - 3
+    - - 1인 창업자
+      - 대화형 AI
+      - 3
+    - - 1인 창업자
+      - 이미지·영상·음성
+      - 3
+    - - 연구자
+      - 검색·리서치
+      - 3
+    - - 연구자
+      - 문서·노트
+      - 3
+    - - 연구자
+      - 대화형 AI
+      - 2
+    - - 검색·리서치
+      - 캠페인 소재
+      - 2
+    - - 검색·리서치
+      - 논문 초안
+      - 3
+    - - 대화형 AI
+      - 캠페인 소재
+      - 3
+    - - 대화형 AI
+      - 수업 자료
+      - 2
+    - - 대화형 AI
+      - 제안서
+      - 3
+    - - 대화형 AI
+      - 상세페이지
+      - 3
+    - - 대화형 AI
+      - 논문 초안
+      - 2
+    - - 문서·노트
+      - 수업 자료
+      - 3
+    - - 문서·노트
+      - 논문 초안
+      - 3
+    - - 이미지·영상·음성
+      - 캠페인 소재
+      - 3
+    - - 이미지·영상·음성
+      - 상세페이지
+      - 3
+    - - 회의·번역
+      - 제안서
+      - 3
+    - - 회의·번역
+      - 수업 자료
+      - 1
+    note: 모든 직무가 대화형 AI를 거칩니다 — 직무마다 '앞뒤에 붙는 도구'가 다를 뿐입니다 (흐름 굵기는 설명용)
+
+  # ---------- 재미 그림 (만화 · 채팅) ----------
+  - file: p02-2-comic-prompt.png
+    kicker: 02-2 · 구체적으로 요청하는 법
+    layout: comic
+    columns: 2
+    title: '"잘 써 줘"의 *배신* — 프롬프트 4컷'
+    subtitle: 막연한 요청과 구체적인 요청은 결과가 이렇게 다릅니다 (가상의 이야기)
+    panels:
+    - color: indigo
+      scene: 🧑‍💼 📝 💻
+      bubbles:
+      - who: 🧑‍💼
+        side: left
+        text: 김 대리, 신제품 출시 안내 메일 좀 써 줘요. 내일 고객사에 보낼 거예요.
+      - who: 🙋
+        side: right
+        text: 네! AI한테 시키면 금방이죠.
+      caption: 월요일 오후, 급한 부탁
+    - color: red
+      sfx: 엥?
+      scene: 🤖 📄 😵
+      bubbles:
+      - who: 🙋
+        side: left
+        text: '"신제품 출시 안내 메일 좋게 써 줘"'
+      - who: 🤖
+        side: right
+        text: 친애하는 고객님! 혁신적이고 놀라운 신제품이 드디어…!!
+      caption: 막연하게 물으면 무난하고 과장된 답
+    - color: teal
+      scene: ✍️ 🎯 📋
+      bubbles:
+      - who: 🙋
+        side: left
+        text: '대상: 2년 거래한 B2B 고객 / 목적: 출시일·주문 방법 안내 / 5문장 이내, 정중하게'
+      - who: 🤖
+        side: right
+        text: 알겠습니다. 출시일과 주문 방법을 첫 문단에 넣을게요.
+      caption: 누가·무엇을·얼마나·어떤 말투로
+    - color: emerald
+      sfx: 완벽!
+      scene: 🧑‍💼 👍 📨
+      bubbles:
+      - who: 🧑‍💼
+        side: left
+        text: 오, 고칠 데가 거의 없네요? 바로 보냅시다.
+      - who: 🙋
+        side: right
+        text: 조건을 구체적으로 줬더니 한 번에 나왔어요!
+      caption: 구체적인 조건 = 한 번에 끝나는 결과
+    note: 모호한 형용사("좋게", "간단히") 대신 대상·분량·형식·말투·꼭 넣을 것을 적으세요
+  - file: p01-3-chat-hallucination.png
+    kicker: 01-3 · 환각과 검증하는 습관
+    layout: chat
+    title: AI가 *없는 논문*을 알려 줬어요
+    subtitle: 환각을 만났을 때 대처법 (가상의 대화)
+    chat_title: 💬 기획팀 단톡방
+    messages:
+    - name: 신입 하늘
+      avatar: 🐣
+      text: AI가 보고서에 넣을 논문을 3개나 찾아 줬어요! 제목·저자·연도까지 완벽해요 ✨
+    - name: 선배 도윤
+      avatar: 🦊
+      text: 좋네. 그 논문 링크 열어 봤어?
+      side: right
+    - name: 신입 하늘
+      avatar: 🐣
+      text: …검색해 보니 그런 논문이 *없어요* 😱 저자 이름은 진짜 있는 사람인데…
+    - name: 선배 도윤
+      avatar: 🦊
+      text: 그게 *환각*이야. AI는 그럴듯한 다음 말을 이어 붙이는 거라, 없는 것도 진짜처럼 만들어.
+      side: right
+    - name: 신입 하늘
+      avatar: 🐣
+      text: 그럼 AI 결과는 못 믿는 건가요?
+    - name: 선배 도윤
+      avatar: 🦊
+      text: '아니, 쓰되 *검증 3단계*를 거치면 돼.
+
+        ① 숫자·이름·출처에 표시 ② 원문과 하나씩 대조 ③ 확인 못 하면 빼기'
+      side: right
+    note: 자신 있는 말투가 정확하다는 뜻은 아닙니다 — 출처는 직접 열어 확인하세요

@@ -16,6 +16,14 @@ layout 종류
     공통 선택 항목: 카드·단계·칸·층에 ex: "예시 문장" 을 넣으면 아래에 예시 상자가 붙습니다.
                     mark: 오른쪽 위 큰 배경 번호 (없으면 파일 이름에서 장 번호를 씁니다)
     compare  tone: neutral 이면 두 표현을 VS 로 비교
+    chart    데이터 그래프 kind: bar|hbar|line|radar|scatter (categories, series, indicators, points, quadrants)
+    network  관계도 (nodes: [{name, group, x, y, size, shape}], groups, links: [[a, b, 라벨]], arrows)
+    sankey   흐름도 (nodes: [{name, color}], links: [[a, b, 값]])
+    comic    만화 컷 (panels: [{scene, bubbles: [{who, side, text}], caption, sfx, color}], columns)
+    quest    게임 지도 (stages: [{icon, title, desc, xp, color}], start_label, goal_label, columns)
+    chat     채팅 대화 (messages: [{name, avatar, side, text}], chat_title)
+    style: fun (theme 또는 그림별) — 손글씨·스티커 느낌의 재미 스타일
+    timeline 타임라인 (events: [{date, title, desc, color, ex}])
     bars     순위 막대 그래프 (groups: [{title, min, max, items: [{label, sub, value, color, tag}]}])
 
 필요한 것: Python(pyyaml), Node.js + Playwright, 한글 글꼴(Noto Sans CJK KR), 이모지 글꼴(Noto Color Emoji)
@@ -270,8 +278,350 @@ def bars(d, th):
     return f'<style>{BARS_CSS}</style><div class="bars" style="grid-template-columns:repeat({cols},1fr)">{"".join(out)}</div>'
 
 
+# ---------- 데이터 시각화 레이아웃 (ECharts, tools/vendor 에 포함) ----------
+ECHARTS = ROOT / "tools" / "vendor" / "echarts-5.5.1.min.js"
+VIZ_CSS = """
+.viz { background: #fff; border: 1px solid #E2E8F0; border-radius: 24px; padding: 14px 12px 8px;
+  box-shadow: 0 1px 2px rgba(15,23,42,.04), 0 12px 28px -14px rgba(15,23,42,.2); }
+.viz .src { font-size: 13.5px; color: #64748B; padding: 2px 14px 6px; }
+.legend { display: flex; flex-wrap: wrap; gap: 10px 22px; padding: 4px 14px 10px; font-size: 16px; font-weight: 700; color: #334155; }
+.legend i { display: inline-block; width: 16px; height: 16px; border-radius: 5px; margin-right: 7px; vertical-align: -2px; }
+.tl { position: relative; display: grid; gap: 16px; padding-top: 34px; }
+.tl::before { content: ''; position: absolute; left: 0; right: 0; top: 46px; height: 6px; border-radius: 3px;
+  background: linear-gradient(90deg, var(--p2), var(--s2)); }
+.tl .ev { position: relative; text-align: center; }
+.tl .dt { position: absolute; top: -34px; left: 0; right: 0; font-size: 15px; font-weight: 800; color: #475569; }
+.tl .pin { width: 30px; height: 30px; border-radius: 50%; margin: 0 auto; background: #fff; border: 7px solid var(--m);
+  box-shadow: 0 6px 14px -6px var(--m); position: relative; z-index: 1; }
+.tl .card { margin-top: 16px; padding: 18px 14px 16px; text-align: center; }
+.tl .card .t { margin-top: 0; font-size: 21px; } .tl .card .d { font-size: 16.5px; }
+"""
+_viz_n = [0]
+
+
+def _col(name, default="indigo"):
+    return pal(name, default)[1]
+
+
+def _echart(opt: dict, height: int, legend: str = "", src: str = "") -> str:
+    _viz_n[0] += 1
+    cid = f"vz{_viz_n[0]}"
+    s = f'<div class="src">{esc(src)}</div>' if src else ""
+    return (f'<style>{VIZ_CSS}</style><div class="viz"><div id="{cid}" style="width:100%;height:{height}px"></div>{legend}{s}</div>'
+            f'<script>(function(){{var c=echarts.init(document.getElementById("{cid}"),null,{{renderer:"svg"}});'
+            f'var o={json.dumps(opt, ensure_ascii=False)};o.animation=false;'
+            f'o.textStyle={{fontFamily:(window.FUN?"GaeguL, Gaegu":"Noto Sans CJK KR"),fontWeight:(window.FUN?"bold":"normal"),color:"#0F172A"}};c.setOption(o);}})();</script>')
+
+
+def _legend(items) -> str:
+    return '<div class="legend">' + "".join(f'<span><i style="background:{c}"></i>{esc(n)}</span>' for n, c in items) + "</div>"
+
+
+AX = {"axisLabel": {"fontSize": 15, "color": "#334155"}, "axisLine": {"lineStyle": {"color": "#CBD5E1"}},
+      "splitLine": {"lineStyle": {"color": "#EEF2F7"}}, "nameTextStyle": {"fontSize": 15, "color": "#64748B", "fontWeight": "bold"}}
+
+
+def chart(d, th):
+    """kind: bar | hbar | line | radar | scatter"""
+    kind = d.get("kind", "bar")
+    unit = d.get("unit", "")
+    h = d.get("height", 440)
+    series = d.get("series", [])
+    leg = _legend([(x["name"], _col(x.get("color"))) for x in series]) if len(series) > 1 else ""
+    opt = {"grid": {"left": 30, "right": 50, "top": 40 if len(series) < 2 else 30, "bottom": 20, "containLabel": True}}
+    if kind in ("bar", "hbar", "line"):
+        cat = {"type": "category", "data": d["categories"], **AX, "axisTick": {"show": False},
+               "axisLabel": {"fontSize": 20 if kind == "hbar" else 17, "fontWeight": "bold", "color": "#0F172A", "interval": 0}}
+        val = {"type": "value", **AX, "name": d.get("value_label", ""),
+               "axisLabel": {"fontSize": 14, "color": "#64748B", "formatter": "{value}" + unit}}
+        if d.get("max") is not None: val["max"] = d["max"]
+        if d.get("min") is not None: val["min"] = d["min"]
+        if kind == "hbar":
+            cat["inverse"] = True
+            opt["xAxis"], opt["yAxis"] = val, cat
+        else:
+            opt["xAxis"], opt["yAxis"] = cat, val
+        out = []
+        hi = d.get("highlight")
+        for x in series:
+            c = _col(x.get("color"))
+            data = []
+            for i, v in enumerate(x["data"]):
+                item = {"value": v}
+                if kind != "line" and hi is not None and len(series) == 1:
+                    item["itemStyle"] = {"color": c if i == hi else "#CBD5E1"}
+                data.append(item)
+            sr = {"type": "line" if kind == "line" else "bar", "name": x["name"], "data": data,
+                  "label": {"show": d.get("labels", True), "position": "right" if kind == "hbar" else "top",
+                            "fontSize": 18, "fontWeight": "bold", "formatter": "{c}" + unit, "color": "#0F172A"}}
+            if kind == "line":
+                sr.update({"smooth": True, "symbolSize": 11, "lineStyle": {"width": 4, "color": c},
+                           "itemStyle": {"color": c, "borderColor": "#fff", "borderWidth": 3},
+                           "areaStyle": {"color": c, "opacity": 0.10} if len(series) == 1 else None})
+            else:
+                rad = [0, 10, 10, 0] if kind == "hbar" else [10, 10, 0, 0]
+                sr.update({"barMaxWidth": 46, "itemStyle": {"color": c, "borderRadius": rad}})
+                if hi is not None and len(series) == 1:
+                    sr["data"] = [{**it, "itemStyle": {**it.get("itemStyle", {}), "borderRadius": rad}} for it in data]
+            if x.get("mark"):
+                m = x["mark"]
+                coord = [m["at"], m["value"]] if kind != "hbar" else [m["value"], m["at"]]
+                sr["markPoint"] = {"symbolSize": 64, "data": [{"coord": coord, "value": m["text"]}],
+                                   "itemStyle": {"color": _col(m.get("color", "orange"))}, "label": {"fontSize": 14, "fontWeight": "bold"}}
+            out.append(sr)
+        opt["series"] = out
+    elif kind == "radar":
+        opt.pop("grid")
+        opt["radar"] = {"indicator": [{"name": n, "max": d.get("max", 5)} for n in d["indicators"]], "radius": "74%",
+                        "axisName": {"fontSize": 19, "fontWeight": "bold", "color": "#0F172A"},
+                        "splitArea": {"areaStyle": {"color": ["#F8FAFC", "#FFFFFF"]}},
+                        "splitLine": {"lineStyle": {"color": "#E2E8F0"}}, "axisLine": {"lineStyle": {"color": "#E2E8F0"}}}
+        opt["series"] = [{"type": "radar", "symbolSize": 8, "data": [
+            {"name": x["name"], "value": x["data"], "lineStyle": {"width": 3, "color": _col(x.get("color"))},
+             "itemStyle": {"color": _col(x.get("color"))}, "areaStyle": {"color": _col(x.get("color")), "opacity": 0.14}}
+            for x in series]}]
+    elif kind == "scatter":
+        xr, yr = d.get("x_range", [0, 10]), d.get("y_range", [0, 10])
+        xm, ym = d.get("x_mid", sum(xr) / 2), d.get("y_mid", sum(yr) / 2)
+        opt["grid"] = {"left": 70, "right": 40, "top": 30, "bottom": 60}
+        opt["xAxis"] = {"type": "value", "min": xr[0], "max": xr[1], "name": d.get("x_label", ""), "nameLocation": "middle",
+                        "nameGap": 34, **AX, "axisLabel": {"show": d.get("show_ticks", False)}, "splitLine": {"show": False}}
+        opt["yAxis"] = {"type": "value", "min": yr[0], "max": yr[1], "name": d.get("y_label", ""), "nameLocation": "middle",
+                        "nameGap": 40, **AX, "axisLabel": {"show": d.get("show_ticks", False)}, "splitLine": {"show": False}}
+        pts = d["points"]
+        q = d.get("quadrants")  # [좌상, 우상, 좌하, 우하]
+        mark_area = []
+        if q:
+            qc = d.get("quadrant_colors", ["#ECFDF5", "#FFF7ED", "#FFF7ED", "#FEF2F2"])
+            boxes = [([xr[0], ym], [xm, yr[1]]), ([xm, ym], [xr[1], yr[1]]), ([xr[0], yr[0]], [xm, ym]), ([xm, yr[0]], [xr[1], ym])]
+            for (a, b), lab, col in zip(boxes, q, qc):
+                mark_area.append([{"coord": a, "name": lab, "itemStyle": {"color": col}}, {"coord": b}])
+        opt["series"] = [{"type": "scatter", "data": [
+            {"name": p_["name"], "value": [p_["x"], p_["y"]], "symbolSize": p_.get("size", 26),
+             **({"label": {"position": p_["label"]}} if p_.get("label") else {}),
+             "itemStyle": {"color": _col(p_.get("color")), "borderColor": "#fff", "borderWidth": 3,
+                           "shadowBlur": 10, "shadowColor": _col(p_.get("color"))}} for p_ in pts],
+            "label": {"show": True, "formatter": "{b}", "position": "right", "fontSize": 17, "fontWeight": "bold", "color": "#0F172A"},
+            "markArea": {"silent": True, "label": {"fontSize": 17, "fontWeight": "bold", "color": "#94A3B8", "position": "insideTop"},
+                         "data": mark_area},
+            "markLine": {"silent": True, "symbol": "none", "lineStyle": {"color": "#94A3B8", "type": "dashed", "width": 2},
+                         "label": {"show": False}, "data": [{"xAxis": xm}, {"yAxis": ym}]}}]
+    return _echart(opt, h, leg, d.get("source", ""))
+
+
+def network(d, th):
+    groups = d.get("groups", {})
+    has_xy = all("x" in n for n in d["nodes"])
+    nodes = []
+    for n in d["nodes"]:
+        c = _col(groups.get(n.get("group"), n.get("color")))
+        item = {"name": n["name"], "symbolSize": n.get("size", 46), "symbol": n.get("shape", "circle"),
+                "itemStyle": {"color": c, "borderColor": "#fff", "borderWidth": 4, "shadowBlur": 14, "shadowColor": c},
+                "label": {"position": n.get("label", "bottom")}}
+        if has_xy: item.update({"x": n["x"], "y": n["y"]})
+        nodes.append(item)
+    links = []
+    for l in d["links"]:
+        lk = {"source": l[0], "target": l[1]}
+        if len(l) > 2 and l[2]:
+            lk["label"] = {"show": True, "formatter": str(l[2]), "fontSize": 14, "fontWeight": "bold", "color": "#475569",
+                           "backgroundColor": "#fff", "padding": [3, 7], "borderRadius": 6, "borderColor": "#E2E8F0", "borderWidth": 1}
+        links.append(lk)
+    layout = "none" if has_xy else d.get("graph_layout", "circular")
+    sr = {"type": "graph", "layout": layout, "roam": False, "data": nodes, "links": links,
+          "left": 80, "right": 90, "top": 60, "bottom": 105,
+          "label": {"show": True, "fontSize": 17, "fontWeight": "bold", "color": "#0F172A"},
+          "edgeSymbol": ["none", "arrow"] if d.get("arrows") else ["none", "none"], "edgeSymbolSize": 12,
+          "lineStyle": {"color": "#94A3B8", "width": 2.5, "curveness": d.get("curveness", 0.12), "opacity": 0.85}}
+    if layout == "force":
+        sr["force"] = {"repulsion": 700, "edgeLength": [110, 170], "gravity": 0.2}
+    if layout == "circular":
+        sr["circular"] = {"rotateLabel": False}
+    leg = _legend([(g, _col(c)) for g, c in groups.items()]) if groups and d.get("legend", True) else ""
+    return _echart({"series": [sr]}, d.get("height", 520), leg, d.get("source", ""))
+
+
+def sankey(d, th):
+    nodes = [{"name": n["name"], "itemStyle": {"color": _col(n.get("color"), "slate")}} for n in d["nodes"]]
+    sr = {"type": "sankey", "left": 16, "right": 150, "top": 16, "bottom": 16, "nodeWidth": 22, "nodeGap": 16,
+          "layoutIterations": 0, "data": nodes, "links": [{"source": a, "target": b, "value": v} for a, b, v in d["links"]],
+          "label": {"fontSize": 17, "fontWeight": "bold", "color": "#0F172A"},
+          "lineStyle": {"color": "gradient", "opacity": 0.42, "curveness": 0.5}}
+    return _echart({"series": [sr]}, d.get("height", 480), "", d.get("source", ""))
+
+
+def timeline(d, th):
+    ev = d["events"]
+    cards_ = "".join(f'<div class="ev" style="{vars_(e.get("color"))}"><div class="dt">{esc(e["date"])}</div><div class="pin"></div>'
+                     f'<div class="card"><div class="t">{esc(e["title"])}</div><div class="d">{esc(e.get("desc"))}</div>{ex(e)}</div></div>'
+                     for e in ev)
+    p2, s2 = pal(th.get("primary"), "indigo")[1], pal(th.get("secondary"), "cyan")[1]
+    return (f'<style>{VIZ_CSS}</style><div class="tl" style="--p2:{p2};--s2:{s2};grid-template-columns:repeat({len(ev)},1fr)">'
+            f'{cards_}</div>')
+
+
+VIZ = {"chart", "network", "sankey"}
+
+
+# ---------- 재미 스타일 (theme.style: fun 또는 그림별 style: fun) ----------
+FONTS = ROOT / "tools" / "vendor" / "fonts"
+INK = "#1E1B4B"
+
+
+def fun_css(theme: dict) -> str:
+    p1, p2, p3 = pal(theme.get("primary"), "indigo")
+    s1, s2, s3 = pal(theme.get("secondary"), "cyan")
+    f = lambda n: (FONTS / n).as_uri()
+    doodle = ("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'>"
+              "<g fill='none' stroke='%23E9E3D3' stroke-width='3' stroke-linecap='round'>"
+              "<path d='M20 30 l6 -12 l6 12 l-12 -7 h12 z'/><circle cx='120' cy='40' r='7'/>"
+              "<path d='M40 120 q10 -14 20 0 t20 0'/><path d='M125 115 l10 10 m0 -10 l-10 10'/></g></svg>")
+    return f"""
+@font-face {{ font-family: 'JuaL'; src: url({f('jua-latin-400-normal.woff2')}); }}
+@font-face {{ font-family: 'Jua'; src: url({f('jua-korean-400-normal.woff2')}); }}
+@font-face {{ font-family: 'GaeguL'; font-weight: 700; src: url({f('gaegu-latin-700-normal.woff2')}); }}
+@font-face {{ font-family: 'Gaegu'; font-weight: 700; src: url({f('gaegu-korean-700-normal.woff2')}); }}
+@font-face {{ font-family: 'GaeguL'; font-weight: 400; src: url({f('gaegu-latin-400-normal.woff2')}); }}
+@font-face {{ font-family: 'Gaegu'; font-weight: 400; src: url({f('gaegu-korean-400-normal.woff2')}); }}
+body {{ background: #FFFBF2; }}
+#c {{ background: #FFFBF2 url("{doodle}"); }}
+#c::before, #c::after {{ opacity: .55; }}
+#c .topbar {{ height: 14px; background: repeating-linear-gradient(-45deg, {p2} 0 22px, {s2} 22px 44px, #FACC15 44px 66px); }}
+#c .mark {{ font-family: 'JuaL','Jua'; -webkit-text-stroke: 0; color: {p2}1f; transform: rotate(8deg); }}
+.kicker {{ font-family: 'JuaL','Jua'; font-weight: 400; letter-spacing: .5px; font-size: 19px; color: {INK};
+  background: #FDE047; border: 3px solid {INK}; box-shadow: 4px 4px 0 {INK}; transform: rotate(-2deg); }}
+.kicker .dot {{ background: {INK}; }}
+h1 {{ font-family: 'JuaL','Jua'; font-weight: 400; font-size: 52px; letter-spacing: 0; color: {INK}; }}
+h1 em {{ -webkit-background-clip: border-box; background: linear-gradient(transparent 58%, #FDE047 58%, #FDE047 92%, transparent 92%);
+  color: {p1}; padding: 0 4px; }}
+.sub {{ font-family: 'GaeguL','Gaegu'; font-weight: 700; letter-spacing: -0.09em; word-spacing: 0.08em; font-size: 27px; color: #475569; }}
+.t {{ font-family: 'JuaL','Jua'; font-weight: 400; font-size: 27px; letter-spacing: 0; }}
+.d {{ font-family: 'GaeguL','Gaegu'; font-weight: 700; letter-spacing: -0.09em; word-spacing: 0.08em; font-size: 23px; color: #1E293B; line-height: 1.35; }}
+.card {{ background: var(--l); border: 3px solid {INK}; border-radius: 24px; box-shadow: 6px 6px 0 {INK}; }}
+.card::before {{ display: none; }}
+.grid > .card:nth-child(odd), .flow > .card:nth-child(4n+1) {{ transform: rotate(-1.2deg); }}
+.grid > .card:nth-child(even), .flow > .card:nth-child(4n+3) {{ transform: rotate(1.2deg); }}
+.badge {{ background: #fff; border: 3px solid {INK}; outline: none; box-shadow: 4px 4px 0 {INK}; border-radius: 50%; font-size: 40px; }}
+.num {{ font-family: 'JuaL','Jua'; font-weight: 400; color: #fff; background: var(--d); border: 2px solid {INK}; border-radius: 999px;
+  padding: 2px 10px; top: 12px; left: 12px; font-size: 15px; transform: rotate(-4deg); }}
+.ex {{ font-family: 'GaeguL','Gaegu'; font-weight: 700; letter-spacing: -0.09em; word-spacing: 0.08em; font-size: 20px; background: #fff; border: 2.5px solid {INK}; border-radius: 16px;
+  transform: rotate(-1deg); box-shadow: 3px 3px 0 {INK}; }}
+.ex b {{ font-family: 'JuaL','Jua'; font-weight: 400; background: #FDE047; color: {INK}; border: 2px solid {INK}; }}
+.conn svg path {{ stroke: {INK}; stroke-width: 3.2; }}
+.note {{ font-family: 'GaeguL','Gaegu'; font-weight: 700; letter-spacing: -0.09em; word-spacing: 0.08em; font-size: 26px; background: #fff; border: 3px solid {INK};
+  border-left: 3px solid {INK}; border-radius: 26px; box-shadow: 6px 6px 0 {INK}; position: relative; }}
+.note .ic {{ background: #FDE047; border: 3px solid {INK}; border-radius: 50%; box-shadow: none; }}
+.panel {{ border: 3px solid {INK}; box-shadow: 6px 6px 0 {INK}; }}
+.panel h2 {{ font-family: 'JuaL','Jua'; font-weight: 400; font-size: 26px; border-bottom: 3px solid {INK}; }}
+.panel li {{ font-family: 'GaeguL','Gaegu'; font-weight: 700; letter-spacing: -0.09em; word-spacing: 0.08em; font-size: 24px; }}
+.ax {{ font-family: 'JuaL','Jua'; font-weight: 400; border: 3px solid {INK}; background: #fff; color: {INK}; font-size: 21px; }}
+.layer {{ border: 3px solid {INK}; border-left: 12px solid var(--m); box-shadow: 5px 5px 0 {INK}; background: var(--l); }}
+.node {{ border: 3px solid {INK}; box-shadow: 4px 4px 0 {INK}; font-family: 'JuaL','Jua'; font-weight: 400; }}
+.edge span {{ font-family: 'GaeguL','Gaegu'; font-weight: 700; letter-spacing: -0.09em; word-spacing: 0.08em; font-size: 20px; border: 2px solid {INK}; }}
+.viz, .bgrp {{ border: 3px solid {INK}; box-shadow: 6px 6px 0 {INK}; }}
+.legend, .viz .src, .blb {{ font-family: 'GaeguL','Gaegu'; font-weight: 700; letter-spacing: -0.09em; word-spacing: 0.08em; font-size: 19px; }}
+.tl .pin {{ border-color: var(--m); outline: 3px solid {INK}; }}
+.tl .dt {{ font-family: 'JuaL','Jua'; font-weight: 400; font-size: 18px; color: {INK}; }}
+.foot {{ font-family: 'GaeguL','Gaegu'; font-size: 17px; letter-spacing: -0.05em; }}
+/* comic */
+.comic {{ display: grid; gap: 22px; }}
+.cp {{ position: relative; background: #fff; border: 4px solid {INK}; border-radius: 10px; box-shadow: 7px 7px 0 {INK};
+  padding: 46px 18px 0; overflow: hidden; display: flex; flex-direction: column; min-height: 330px;
+  background-image: radial-gradient(var(--l) 2.2px, transparent 2.2px); background-size: 14px 14px; }}
+.cp .pn {{ position: absolute; top: 10px; left: 12px; width: 38px; height: 38px; border-radius: 50%; background: var(--m); color: #fff;
+  border: 3px solid {INK}; font-family: 'JuaL','Jua'; font-size: 21px; display: flex; align-items: center; justify-content: center; }}
+.cp .sfx {{ position: absolute; top: 10px; right: 14px; font-family: 'JuaL','Jua'; font-size: 26px; color: #fff; background: #F43F5E;
+  border: 3px solid {INK}; padding: 1px 12px; border-radius: 12px; transform: rotate(6deg); box-shadow: 3px 3px 0 {INK}; }}
+.bubbles {{ display: flex; flex-direction: column; gap: 12px; flex: 1; }}
+.bb {{ position: relative; max-width: 82%; background: #fff; border: 3px solid {INK}; border-radius: 20px; padding: 9px 15px;
+  font-family: 'GaeguL','Gaegu'; font-weight: 700; letter-spacing: -0.09em; word-spacing: 0.08em; font-size: 22px; line-height: 1.3; color: {INK}; }}
+.bb.l {{ align-self: flex-start; margin-left: 64px; }} .bb.r {{ align-self: flex-end; margin-right: 64px; background: #FEF9C3; }}
+.bb .av {{ position: absolute; top: -6px; font-size: 44px; font-family: 'Noto Color Emoji'; }}
+.bb.l .av {{ left: -62px; }} .bb.r .av {{ right: -62px; }}
+.scene {{ text-align: center; font-family: 'Noto Color Emoji'; font-size: 52px; letter-spacing: 8px; margin: 6px 0 4px; }}
+.cap {{ margin: 10px -18px 0; background: #FDE047; border-top: 4px solid {INK}; padding: 9px 16px; font-family: 'JuaL','Jua';
+  font-size: 21px; color: {INK}; text-align: center; }}
+/* quest */
+.quest {{ position: relative; display: grid; gap: 34px 26px; padding: 6px 4px; }}
+.qs {{ position: relative; text-align: center; background: var(--l); border: 3px solid {INK}; border-radius: 26px; box-shadow: 6px 6px 0 {INK};
+  padding: 34px 14px 16px; }}
+.qs .lv {{ position: absolute; top: -18px; left: 50%; transform: translateX(-50%) rotate(-3deg); background: #FDE047; border: 3px solid {INK};
+  border-radius: 999px; padding: 1px 14px; font-family: 'JuaL','Jua'; font-size: 18px; color: {INK}; white-space: nowrap; }}
+.qs .qi {{ font-family: 'Noto Color Emoji'; font-size: 46px; }}
+.qs .t {{ margin-top: 4px; font-size: 25px; color: var(--d); }}
+.qs .d {{ font-size: 21px; margin-top: 4px; }}
+.qs .xp {{ display: inline-block; margin-top: 8px; font-family: 'JuaL','Jua'; font-size: 16px; color: #fff; background: var(--m);
+  border: 2px solid {INK}; border-radius: 999px; padding: 1px 10px; }}
+.qs:not(:last-child)::after {{ content: '➜'; position: absolute; right: -27px; top: 44%; font-size: 26px; color: {INK}; z-index: 2; }}
+.qs.goal {{ background: #FEF3C7; }} .qs.start {{ background: #ECFDF5; }}
+.qa {{ position: absolute; font-family: 'JuaL','Jua'; font-size: 34px; color: {INK}; }}
+/* chat */
+.chat {{ background: #DBEAFE; border: 4px solid {INK}; border-radius: 34px; box-shadow: 7px 7px 0 {INK}; padding: 18px 26px 22px; }}
+.chat .ttl {{ text-align: center; font-family: 'JuaL','Jua'; font-size: 22px; color: {INK}; padding-bottom: 12px; border-bottom: 3px dashed {INK}80; margin-bottom: 14px; }}
+.msg {{ display: flex; gap: 12px; align-items: flex-start; margin: 12px 0; }}
+.msg.r {{ flex-direction: row-reverse; }}
+.msg .av {{ width: 58px; height: 58px; flex: none; border-radius: 50%; background: #fff; border: 3px solid {INK}; display: flex;
+  align-items: center; justify-content: center; font-family: 'Noto Color Emoji'; font-size: 32px; }}
+.msg .nm {{ font-family: 'JuaL','Jua'; font-size: 16px; color: #334155; margin: 0 6px 3px; }}
+.msg.r .nm {{ text-align: right; }}
+.msg .tx {{ display: inline-block; background: #fff; border: 3px solid {INK}; border-radius: 20px; padding: 9px 16px; max-width: 760px;
+  font-family: 'GaeguL','Gaegu'; font-weight: 700; letter-spacing: -0.09em; word-spacing: 0.08em; font-size: 23px; line-height: 1.35; color: {INK}; white-space: pre-line; }}
+.msg.r .tx {{ background: #FEF08A; }}
+.msg .tx em {{ font-style: normal; background: linear-gradient(transparent 55%, #A7F3D0 55%); }}
+.msg.r > div {{ text-align: right; }}
+.msg.r .tx {{ text-align: left; }}
+"""
+
+
+def comic(d, th):
+    cols = d.get("columns", 2)
+    out = []
+    for i, pnl in enumerate(d["panels"], 1):
+        bbs = "".join(f'<div class="bb {"r" if b.get("side") == "right" else "l"}"><span class="av">{esc(b.get("who", "🙂"))}</span>{esc(b["text"])}</div>'
+                      for b in pnl.get("bubbles", []))
+        scene = f'<div class="scene">{esc(pnl["scene"])}</div>' if pnl.get("scene") else ""
+        sfx = f'<div class="sfx">{esc(pnl["sfx"])}</div>' if pnl.get("sfx") else ""
+        cap = f'<div class="cap">{esc(pnl["caption"])}</div>' if pnl.get("caption") else ""
+        out.append(f'<div class="cp" style="{vars_(pnl.get("color"))}"><div class="pn">{i}</div>{sfx}{scene}'
+                   f'<div class="bubbles">{bbs}</div>{cap}</div>')
+    return f'<div class="comic" style="grid-template-columns:repeat({cols},1fr)">{"".join(out)}</div>'
+
+
+def quest(d, th):
+    st = d["stages"]
+    cols = d.get("columns", 4)
+    tiles = []
+    for i, s_ in enumerate(st):
+        kind = "start" if i == 0 and d.get("start_label") else ("goal" if i == len(st) - 1 and d.get("goal_label") else "")
+        lv = s_.get("level") or (d.get("start_label") if kind == "start" else d.get("goal_label") if kind == "goal" else f"LEVEL {i + (0 if d.get('start_label') else 1)}")
+        xp = f'<div class="xp">{esc(s_["xp"])}</div>' if s_.get("xp") else ""
+        tiles.append(f'<div class="qs {kind}" style="{vars_(s_.get("color"))}"><div class="lv">{esc(lv)}</div><div class="qi">{esc(s_.get("icon", "⭐"))}</div>'
+                     f'<div class="t">{esc(s_["title"])}</div><div class="d">{esc(s_.get("desc"))}</div>{ex(s_)}{xp}</div>')
+    rows = [tiles[i:i + cols] for i in range(0, len(tiles), cols)]
+    html_rows = []
+    for r_i, r in enumerate(rows):
+        if r_i % 2 == 1:
+            r = list(reversed(r)) if d.get("snake", False) else r
+            pad = cols - len(r)
+            r = ['<div></div>'] * pad + r if d.get("snake", False) else r
+        html_rows.extend(r)
+    arrows = d.get("arrow_note", "")
+    return (f'<div class="quest" style="grid-template-columns:repeat({cols},1fr)">{"".join(html_rows)}</div>'
+            + (f'<div class="sub" style="text-align:center;margin-top:14px">{esc(arrows)}</div>' if arrows else ""))
+
+
+def chat(d, th):
+    msgs = "".join(f'<div class="msg {"r" if m.get("side") == "right" else ""}"><div class="av">{esc(m.get("avatar", "🙂"))}</div>'
+                   f'<div><div class="nm">{esc(m.get("name", ""))}</div><div class="tx">{title_html(m["text"]).replace("<em>", "<em>")}</div></div></div>'
+                   for m in d["messages"])
+    ttl = f'<div class="ttl">{esc(d["chat_title"])}</div>' if d.get("chat_title") else ""
+    return f'<div class="chat">{ttl}{msgs}</div>'
+
+
 LAYOUTS = {"flow": flow, "cards": cards, "compare": compare, "matrix": matrix,
-           "spectrum": spectrum, "triple": triple, "stack": stack, "bars": bars}
+           "spectrum": spectrum, "triple": triple, "stack": stack, "bars": bars,
+           "chart": chart, "network": network, "sankey": sankey, "timeline": timeline,
+           "comic": comic, "quest": quest, "chat": chat}
 
 
 def title_html(t: str) -> str:
@@ -289,7 +639,12 @@ def page(d: dict, th: dict) -> str:
     if mark is None:
         m = re.match(r"(?:ch|p)(\d{2}(?:-\d+)?)", Path(d["file"]).stem)
         mark = m.group(1) if m else ""
-    return (f'<!doctype html><html><head><meta charset="utf-8"><style>{css(th)}</style></head><body><div id="c">'
+    lib = f'<script src="{ECHARTS.as_uri()}"></script>' if d["layout"] in VIZ else ""
+    if lib and (d.get("style") or th.get("style")) == "fun":
+        lib = "<script>window.FUN=true</script>" + lib
+    fun = (d.get("style") or th.get("style")) == "fun" or d["layout"] in ("comic", "quest", "chat")
+    style = css(th) + (fun_css(th) if fun else "")
+    return (f'<!doctype html><html><head><meta charset="utf-8"><style>{style}</style>{lib}</head><body><div id="c">'
             f'<div class="topbar"></div><div class="mark">{esc(mark)}</div><div class="z">'
             f'<div class="kicker"><span class="dot"></span>{esc(kicker)}</div><h1>{title_html(d["title"])}</h1>{sub}'
             f'<div class="body">{LAYOUTS[d["layout"]](d, th)}</div>{note}{foot}</div></div></body></html>')
@@ -304,6 +659,7 @@ const jobs = JSON.parse(process.argv[2]);
   for (const j of jobs) {
     await page.goto('file://' + j.html);
     await page.evaluate(() => document.fonts.ready);
+    if (j.wait) await page.waitForTimeout(j.wait);
     await page.locator('#c').screenshot({ path: j.png });
     console.log('  ✓ ' + j.name);
   }
@@ -326,7 +682,8 @@ def main() -> None:
                 sys.exit(f"[오류] 알 수 없는 layout: {d['layout']} ({d['file']})")
             h = Path(tmp) / (Path(d["file"]).stem + ".html")
             h.write_text(page(d, theme), encoding="utf-8")
-            jobs.append({"html": str(h), "png": str(ASSETS / d["file"]), "name": d["file"]})
+            jobs.append({"html": str(h), "png": str(ASSETS / d["file"]), "name": d["file"],
+                         "wait": 700 if d["layout"] in VIZ else 300})
         if not jobs:
             sys.exit("만들 이미지가 없습니다.")
         print(f"[이미지 생성] {len(jobs)}개")
