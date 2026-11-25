@@ -7,3 +7,13 @@ secondary: cyan
 icons: ["💬", "🤖", "⚡"]
 keywords: [프롬프트, 업무 레시피, AI 도구 지도, 에이전트·자동화]
 author: ""
+
+# ---- 재미 표지 (style: fun) ----
+style: fun
+bg: "#FFF1C9"
+hook: "AI한테 물어봤는데 왜 엉뚱한 답만 나올까?"
+hero: "🤖"
+bubble: "'잘 써 줘' 말고|이렇게 물어보세요!"
+stickers: ["💬", "⚡", "📝", "✨"]
+burst: "따라 하면|바로 쓰는|업무 레시피"
+deco: "🚀"
